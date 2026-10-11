@@ -57,4 +57,4 @@ def list_low_stock(clinic_id: str) -> str:
 
 
 if __name__ == "__main__":
-    mcp.run()          # stdio transport: stdout is the protocol, logs go to stderr + file
+    mcp.run(transport="streamable-http")   # moving to HTTP for the new agent
