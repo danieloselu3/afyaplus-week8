@@ -156,10 +156,13 @@ jobs:
     permissions: {contents: read, packages: read}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "${{ env.PYTHON_VERSION }}", cache: pip}
+      # v1.3.0 incident: this job installed only pyyaml, but check_release.py imports the MCP
+      # server (needs `mcp`), so production promotion failed. Install what the gates need.
+      - run: pip install -r requirements-dev.txt
       - name: The tag is the release (v<release>)
-        run: |
-          pip install -q pyyaml
-          python scripts/check_release.py --tag ${{ github.ref_name }}
+        run: python scripts/check_release.py --tag ${{ github.ref_name }}
       - name: Pull the SAME digest staging ran
         run: |
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
