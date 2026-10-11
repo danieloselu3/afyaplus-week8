@@ -61,7 +61,7 @@ def _mcp_client(trace_id: str) -> MultiServerMCPClient:
         "logistics": {
             "transport": "stdio",
             "command": sys.executable,
-            "args": [str(HERE / "logistics_mcp.py")],
+            "args": [str(HERE / "logistics_mcp_versioned.py")],   # Week 8: versioned server
             "cwd": str(HERE),
             # The stdio client passes only a minimal default environment, so name what the server needs.
             "env": {"TRACE_ID": trace_id, "LOG_DIR": str(LOG_DIR), "PYTHONUNBUFFERED": "1"},

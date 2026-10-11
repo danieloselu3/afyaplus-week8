@@ -3,7 +3,7 @@ import triage_model
 
 def test_red_flag_can_never_be_downgraded(monkeypatch):
     monkeypatch.setattr(triage_model, "TRIAGE_BACKEND", "openai")
-    monkeypatch.setattr(triage_model, "_openai", lambda m, c: (
+    monkeypatch.setattr(triage_model, "_openai", lambda m, c, p: (
         triage_model.TriageResult(urgency="low", advice="Drink water and rest."),
         {"tokens_in": 10, "tokens_out": 5}))
     result = triage_model.triage_model("heavy bleeding after a fall", "Kisii")
@@ -12,7 +12,7 @@ def test_red_flag_can_never_be_downgraded(monkeypatch):
 
 
 def test_malformed_model_output_becomes_model_unavailable(monkeypatch):
-    def bad(message, county):
+    def bad(message, county, system_prompt):
         return triage_model.TriageResult.model_validate_json('{"urgency": "extreme"}'), {}
     monkeypatch.setattr(triage_model, "TRIAGE_BACKEND", "openai")
     monkeypatch.setattr(triage_model, "_openai", bad)

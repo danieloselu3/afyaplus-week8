@@ -5,6 +5,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 import auth
+import prompt_app
 import triage_api
 from config import VERSION
 from triage_model import ModelUnavailable
@@ -22,9 +23,15 @@ def login(username="mercy", password="logistics2026"):
 def test_health_is_open_and_reports_version():
     r = client.get("/health")
     assert r.status_code == 200
-    assert r.json() == {"service": "triage-api", "version": VERSION, "status": "ok",
-                        "model_backend": "stub", "model": "gpt-4o-mini",
-                        "llm_endpoint": "api.openai.com", "cache": "memory"}
+    body = r.json()
+    assert {k: body[k] for k in ("service", "version", "status", "model_backend", "model",
+                                 "llm_endpoint", "cache")} == {
+        "service": "triage-api", "version": VERSION, "status": "ok", "model_backend": "stub",
+        "model": prompt_app.CONFIG["model"], "llm_endpoint": "api.openai.com", "cache": "memory"}
+    # Week 8: the running prompt, config and build are provable from /health alone
+    assert body["prompt_version"] == prompt_app.PROMPT_VERSION
+    assert body["prompt_sha256"] == prompt_app.load_pin()["versions"][body["prompt_version"]]
+    assert len(body["config_sha256"]) == 64 and body["image_tag"] and body["git_sha"]
 
 
 def test_token_then_triage_200():

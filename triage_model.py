@@ -7,20 +7,17 @@ from typing import Literal
 
 from pydantic import BaseModel, Field, ValidationError
 
+import prompt_app
 from config import LLM_BASE_URL, OPENAI_MODEL, TRIAGE_BACKEND
 
 # Safety floor: these words always mean "high", whatever the model says.
 URGENT_WORDS = ["chest pain", "bleeding", "unconscious", "cannot breathe",
                 "can't breathe", "seizure", "convulsion", "not breathing"]
 
-SYSTEM_PROMPT = (
-    "You are a triage assistant for AfyaPlus, a Kenyan community health network. "
-    "Classify the urgency of the patient's message and give ONE short, safe, "
-    "non-diagnostic next step (max 2 sentences). Never prescribe medicines or doses. "
-    "urgency must be one of: low (self-care, monitor), medium (see a clinician within "
-    "24 hours), high (go to a clinic or emergency care now). "
-    'Reply only with JSON: {"urgency": "...", "advice": "..."}'
-)
+# The system prompt is no longer a string in code: it is a pinned, versioned file
+# (prompts/triage_system_v<version>.txt) loaded by prompt_app. Variant A by default.
+SYSTEM_PROMPT = prompt_app.SYSTEM_PROMPT
+_RUN = prompt_app.CONFIG
 
 
 class ModelUnavailable(Exception):
@@ -53,19 +50,19 @@ def _stub(message: str) -> TriageResult:
 _client = None
 
 
-def _openai(message: str, county: str) -> tuple[TriageResult, dict]:
+def _openai(message: str, county: str, system_prompt: str) -> tuple[TriageResult, dict]:
     global _client
     from openai import OpenAI            # imported lazily so the stub path needs no key
     if _client is None:
         # max_retries=1: a sane client, never a retry storm (see cost/retry_storm.py)
         _client = OpenAI(api_key=os.getenv("LLM_API_KEY") or os.getenv("OPENAI_API_KEY"),
-                         base_url=LLM_BASE_URL, timeout=20, max_retries=1)
+                         base_url=LLM_BASE_URL, timeout=_RUN["timeout_s"], max_retries=1)
     response = _client.chat.completions.create(
         model=OPENAI_MODEL,
-        temperature=0,
-        max_tokens=150,
+        temperature=_RUN["temperature"],
+        max_tokens=_RUN["max_tokens"],
         response_format={"type": "json_object"},
-        messages=[{"role": "system", "content": SYSTEM_PROMPT},
+        messages=[{"role": "system", "content": system_prompt},
                   {"role": "user", "content": f"County: {county}\nMessage: {message}"}],
     )
     result = TriageResult.model_validate_json(response.choices[0].message.content)
@@ -74,14 +71,16 @@ def _openai(message: str, county: str) -> tuple[TriageResult, dict]:
     return result, usage
 
 
-def triage_model(message: str, county: str) -> dict:
-    """Return {"urgency", "advice", "model_used", "tokens_in", "tokens_out"}.
+def triage_model(message: str, county: str, variant: str = "A") -> dict:
+    """Return {"urgency", "advice", "model_used", "prompt_version", "tokens_in", "tokens_out"}.
+    variant 'A' is the pinned prompt, 'B' the canary (if one is configured).
     Raises ModelUnavailable on any upstream failure or malformed model output."""
+    prompt_version, system_prompt, _sha = prompt_app.prompt_for(variant)
     if TRIAGE_BACKEND == "stub":
         result, usage, model_used = _stub(message), {"tokens_in": 0, "tokens_out": 0}, "triage-stub-v1"
     else:
         try:
-            result, usage = _openai(message, county)
+            result, usage = _openai(message, county, system_prompt)
         except ValidationError as exc:
             raise ModelUnavailable("model returned malformed output") from exc
         except Exception as exc:          # network, auth, rate limit, timeout
@@ -91,4 +90,5 @@ def triage_model(message: str, county: str) -> dict:
     if _red_flag(message) and urgency != "high":
         urgency = "high"                  # the model may never downgrade a red flag
         result.advice = "Warning signs reported: go to the nearest clinic now. " + result.advice
-    return {"urgency": urgency, "advice": result.advice, "model_used": model_used, **usage}
+    return {"urgency": urgency, "advice": result.advice, "model_used": model_used,
+            "prompt_version": prompt_version, **usage}
