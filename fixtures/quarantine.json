@@ -1,0 +1,5 @@
+{
+  "ids": [],
+  "reasons": {},
+  "policy": "quarantine_policy.md: at most 5% of the golden set (1 case of 30); a case graduates after 3 consecutive passing recordings; clinical_ops + ml-eng approve every add and every graduation"
+}

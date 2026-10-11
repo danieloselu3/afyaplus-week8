@@ -71,11 +71,17 @@ def _openai(message: str, county: str, system_prompt: str) -> tuple[TriageResult
     return result, usage
 
 
-def triage_model(message: str, county: str, variant: str = "A") -> dict:
+def triage_model(message: str, county: str, variant: str = "A",
+                 prompt: tuple[str, str] | None = None) -> dict:
     """Return {"urgency", "advice", "model_used", "prompt_version", "tokens_in", "tokens_out"}.
-    variant 'A' is the pinned prompt, 'B' the canary (if one is configured).
+    variant 'A' is the pinned prompt, 'B' the canary (if one is configured). prompt=(version,
+    text) overrides both: the eval recorder uses it to run any pinned version through the
+    exact same path, safety floor included.
     Raises ModelUnavailable on any upstream failure or malformed model output."""
-    prompt_version, system_prompt, _sha = prompt_app.prompt_for(variant)
+    if prompt is not None:
+        prompt_version, system_prompt = prompt
+    else:
+        prompt_version, system_prompt, _sha = prompt_app.prompt_for(variant)
     if TRIAGE_BACKEND == "stub":
         result, usage, model_used = _stub(message), {"tokens_in": 0, "tokens_out": 0}, "triage-stub-v1"
     else:
