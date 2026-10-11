@@ -30,8 +30,11 @@ def test_null_expected_urgency_scores_properties_only():
     assert ok
 
 
-def test_committed_tree_passes_the_gate(monkeypatch):
-    monkeypatch.setattr("sys.argv", ["eval_prompts.py"])
+def test_the_pinned_production_prompt_passes_on_its_recording(monkeypatch):
+    # Only variant A here: whether every SERVABLE prompt passes is the eval job's decision,
+    # not a unit test's. Otherwise a bad candidate would fail CI at lint-test, not at the gate.
+    import prompt_app
+    monkeypatch.setattr("sys.argv", ["eval_prompts.py", "--version", prompt_app.PROMPT_VERSION])
     assert ev.main() == 0
 
 
