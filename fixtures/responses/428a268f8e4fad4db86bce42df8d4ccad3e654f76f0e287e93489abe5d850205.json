@@ -1,0 +1,191 @@
+{
+  "prompt_version": "1.3.0-candidate",
+  "prompt_sha256": "428a268f8e4fad4db86bce42df8d4ccad3e654f76f0e287e93489abe5d850205",
+  "model": "gpt-4o-mini-2024-07-18",
+  "temperature": 0,
+  "golden_sha256": "e57339dbd7c6370de4d03d9bd758ede56203a85186af32c3b030629f981b4452",
+  "n": 30,
+  "recorded_at": "2026-10-11T17:44:02+00:00",
+  "by_id": {
+    "g01": {
+      "urgency": "high",
+      "advice": "Please go to a clinic or emergency care immediately.",
+      "tokens_in": 162,
+      "tokens_out": 23
+    },
+    "g02": {
+      "urgency": "high",
+      "advice": "Please go to a clinic or emergency care immediately.",
+      "tokens_in": 161,
+      "tokens_out": 23
+    },
+    "g03": {
+      "urgency": "high",
+      "advice": "Please go to a clinic or emergency care now.",
+      "tokens_in": 167,
+      "tokens_out": 23
+    },
+    "g04": {
+      "urgency": "high",
+      "advice": "Please take your child to a clinic or emergency care immediately.",
+      "tokens_in": 164,
+      "tokens_out": 25
+    },
+    "g05": {
+      "urgency": "high",
+      "advice": "Please go to a clinic or emergency care immediately.",
+      "tokens_in": 164,
+      "tokens_out": 23
+    },
+    "g06": {
+      "urgency": "high",
+      "advice": "Please go to a clinic or emergency care immediately.",
+      "tokens_in": 163,
+      "tokens_out": 23
+    },
+    "g07": {
+      "urgency": "high",
+      "advice": "Please go to a clinic or emergency care immediately for evaluation.",
+      "tokens_in": 164,
+      "tokens_out": 25
+    },
+    "g08": {
+      "urgency": "high",
+      "advice": "Please go to a clinic or emergency care now.",
+      "tokens_in": 161,
+      "tokens_out": 23
+    },
+    "g09": {
+      "urgency": "high",
+      "advice": "Please go to a clinic or emergency care immediately.",
+      "tokens_in": 159,
+      "tokens_out": 23
+    },
+    "g10": {
+      "urgency": "medium",
+      "advice": "Please see a clinician within 24 hours for further evaluation.",
+      "tokens_in": 161,
+      "tokens_out": 25
+    },
+    "g11": {
+      "urgency": "high",
+      "advice": "Please go to a clinic or emergency care now for a thorough evaluation.",
+      "tokens_in": 167,
+      "tokens_out": 27
+    },
+    "g12": {
+      "urgency": "medium",
+      "advice": "Please see a clinician within 24 hours for further evaluation.",
+      "tokens_in": 161,
+      "tokens_out": 25
+    },
+    "g13": {
+      "urgency": "medium",
+      "advice": "Please see a clinician within 24 hours for a proper evaluation of your ear pain and discharge.",
+      "tokens_in": 164,
+      "tokens_out": 32
+    },
+    "g14": {
+      "urgency": "medium",
+      "advice": "Please see a clinician within 24 hours to evaluate your toothache and swelling.",
+      "tokens_in": 162,
+      "tokens_out": 29
+    },
+    "g15": {
+      "urgency": "medium",
+      "advice": "Please see a clinician within 24 hours to have your ankle evaluated.",
+      "tokens_in": 165,
+      "tokens_out": 27
+    },
+    "g16": {
+      "urgency": "medium",
+      "advice": "Please see a clinician within 24 hours for a proper evaluation and treatment.",
+      "tokens_in": 167,
+      "tokens_out": 28
+    },
+    "g17": {
+      "urgency": "medium",
+      "advice": "Please see a clinician within the next 24 hours for a proper evaluation.",
+      "tokens_in": 165,
+      "tokens_out": 28
+    },
+    "g18": {
+      "urgency": "medium",
+      "advice": "Please see a clinician within 24 hours for a proper evaluation of your symptoms.",
+      "tokens_in": 164,
+      "tokens_out": 29
+    },
+    "g19": {
+      "urgency": "low",
+      "advice": "Take a break, rest, and stay hydrated. Monitor your symptoms and see a clinician if the headache persists or worsens.",
+      "tokens_in": 160,
+      "tokens_out": 38
+    },
+    "g20": {
+      "urgency": "low",
+      "advice": "You can monitor your symptoms and try to rest. Staying hydrated and using a saline nasal spray may help.",
+      "tokens_in": 163,
+      "tokens_out": 34
+    },
+    "g21": {
+      "urgency": "low",
+      "advice": "Rest and apply a warm compress to the sore areas. Monitor your symptoms and consider gentle stretching.",
+      "tokens_in": 161,
+      "tokens_out": 32
+    },
+    "g22": {
+      "urgency": "low",
+      "advice": "Keep the area clean and monitor for any signs of infection, such as increased redness or swelling.",
+      "tokens_in": 162,
+      "tokens_out": 32
+    },
+    "g23": {
+      "urgency": "low",
+      "advice": "Try to drink some water and avoid lying down for a while. Monitor your symptoms and see a clinician if they worsen.",
+      "tokens_in": 160,
+      "tokens_out": 37
+    },
+    "g24": {
+      "urgency": "low",
+      "advice": "You can apply a cool compress to the affected area and use soothing lotion to help with the discomfort. Make sure to stay hydrated and protect your skin from further sun exposure.",
+      "tokens_in": 167,
+      "tokens_out": 47
+    },
+    "g25": {
+      "urgency": "low",
+      "advice": "ORS stands for Oral Rehydration Solution, which is used to prevent dehydration. You can mix it by following the instructions on the packet, usually by dissolving the powder in a specific amount of clean water.",
+      "tokens_in": 166,
+      "tokens_out": 55
+    },
+    "g26": {
+      "urgency": "low",
+      "advice": "You can try resting in a quiet, dark room and stay hydrated. If the headache persists or worsens, consider seeing a clinician.",
+      "tokens_in": 169,
+      "tokens_out": 40
+    },
+    "g27": {
+      "urgency": "low",
+      "advice": "It's important to follow the guidance of healthcare professionals. Please monitor your symptoms and reach out to a clinician if you have concerns.",
+      "tokens_in": 166,
+      "tokens_out": 38
+    },
+    "g28": {
+      "urgency": "medium",
+      "advice": "Tafadhali tembelea kliniki ndani ya masaa 24 ili upate uchunguzi na matibabu.",
+      "tokens_in": 165,
+      "tokens_out": 39
+    },
+    "g29": {
+      "urgency": "high",
+      "advice": "Tafadhali mpeleke mtoto wako kwenye kliniki au huduma ya dharura mara moja.",
+      "tokens_in": 169,
+      "tokens_out": 34
+    },
+    "g30": {
+      "urgency": "low",
+      "advice": "Monitor your symptoms and ensure you stay hydrated. If your cough worsens or you develop new symptoms, consider seeing a clinician.",
+      "tokens_in": 165,
+      "tokens_out": 38
+    }
+  }
+}

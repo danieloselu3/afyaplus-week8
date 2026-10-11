@@ -7,12 +7,11 @@ week forbids: write a new version file instead. The one exception is a draft tha
 never left its pull request, and that needs --replace-unreleased, so the diff shows it.
 """
 import argparse
+import hashlib
 import json
-import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT))
 
 
 def main() -> int:
@@ -21,15 +20,21 @@ def main() -> int:
     ap.add_argument("--replace-unreleased", action="store_true",
                     help="re-pin a draft that was never merged to main or tagged")
     args = ap.parse_args()
-    from prompt_app import PIN_FILE, load_prompt, sha256
-    pin = json.loads(PIN_FILE.read_text(encoding="utf-8"))
-    digest = sha256(load_prompt(args.version))
+    # Standalone on purpose: importing prompt_app would fail closed on the very mismatch
+    # this tool exists to resolve. Same bytes, same hash rule as prompt_app.load_pinned.
+    path = ROOT / "prompts" / f"triage_system_v{args.version}.txt"
+    if not path.is_file():
+        print(f"no prompt file {path.name}")
+        return 1
+    pin_file = ROOT / "prompts" / "pin.json"
+    pin = json.loads(pin_file.read_text(encoding="utf-8"))
+    digest = hashlib.sha256(path.read_text(encoding="utf-8").encode("utf-8")).hexdigest()
     old = pin["versions"].get(args.version)
     if old and old != digest and not args.replace_unreleased:
         print(f"REFUSED: {args.version} is already pinned to {old[:12]}. Add a new version file.")
         return 1
     pin["versions"][args.version] = digest
-    PIN_FILE.write_text(json.dumps(pin, indent=2) + "\n", encoding="utf-8")
+    pin_file.write_text(json.dumps(pin, indent=2) + "\n", encoding="utf-8")
     print(f"pinned {args.version} = {digest}" + (f" (replaced unreleased {old[:12]})" if old and old != digest else ""))
     return 0
 
