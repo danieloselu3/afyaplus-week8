@@ -1,13 +1,16 @@
 # triage_api.py - the secured AfyaPlus triage service
+import time
 from typing import Literal
 from urllib.parse import urlparse
 
 from fastapi import BackgroundTasks, Depends, FastAPI, HTTPException, Request, Response
 from pydantic import BaseModel, ConfigDict, Field
 
-from auth import auth_router, require_role
+import ab_metrics
 import prompt_app
 import response_cache
+from ab_prompt_flag import select_prompt
+from auth import auth_router, require_role
 from config import (CACHE_ENABLED, LLM_BASE_URL, OPENAI_MODEL, TRIAGE_BACKEND,
                     TRIAGE_RATE_LIMIT_PER_MIN, VERSION, get_logger)
 from observability import add_request_logging
@@ -85,17 +88,26 @@ def triage(body: TriageRequest, request: Request, response: Response, background
            user: dict = Depends(require_role("coordinator"))):
     check_rate_limit(f"triage:{user['sub']}", max_requests=TRIAGE_RATE_LIMIT_PER_MIN)
     trace_id = request.state.trace_id
+    started = time.perf_counter()
+    # Sticky canary: the county decides the prompt variant (A = pinned, B = candidate slice).
+    variant, prompt_version, _text, prompt_sha = select_prompt(body.county)
     try:
         result, cache_status = response_cache.cached_triage(
-            triage_model, body.patient_message, body.county)
+            lambda message, county: triage_model(message, county, variant),
+            body.patient_message, body.county, prompt_sha=prompt_sha)
     except ModelUnavailable as exc:
         log.error("trace=%s model_error=%s", trace_id, exc)
         raise HTTPException(status_code=503, detail="The AI model is unavailable. Try again shortly.")
     billed = cache_status != "HIT"       # a HIT costs no tokens: that is the whole lever
-    log.info("trace=%s model=%s cache=%s tokens_in=%s tokens_out=%s",
-             trace_id, result["model_used"], cache_status,
-             result["tokens_in"] if billed else 0, result["tokens_out"] if billed else 0)
+    tokens_in, tokens_out = (result["tokens_in"], result["tokens_out"]) if billed else (0, 0)
+    log.info("trace=%s model=%s variant=%s prompt=%s cache=%s tokens_in=%s tokens_out=%s",
+             trace_id, result["model_used"], variant, prompt_version, cache_status, tokens_in, tokens_out)
     response.headers["X-Cache"] = cache_status
+    response.headers["X-Prompt-Variant"] = variant
+    background.add_task(ab_metrics.record, trace_id=trace_id, county=body.county, variant=variant,
+                        prompt_version=prompt_version, urgency=result["urgency"], cache=cache_status,
+                        latency_ms=(time.perf_counter() - started) * 1000, tokens_in=tokens_in,
+                        tokens_out=tokens_out, message=body.patient_message)
     background.add_task(write_audit_line, trace_id, user["sub"], body.county, result["urgency"])
     return TriageResponse(urgency=result["urgency"], advice=result["advice"],
                           model_used=result["model_used"], prompt_version=result["prompt_version"],

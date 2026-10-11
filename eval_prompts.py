@@ -56,7 +56,7 @@ def check_case(pred: dict, case: dict) -> tuple[bool, list[str], list[str]]:
             quality.append(f"missing '{phrase}'")
     if case.get("must_include_any") and not any(p.lower() in text for p in case["must_include_any"]):
         quality.append(f"none of {case['must_include_any'][:3]}...")
-    for phrase in case.get("must_not", []) + GLOBAL_MUST_NOT:
+    for phrase in dict.fromkeys(case.get("must_not", []) + GLOBAL_MUST_NOT):   # each phrase once
         if phrase.lower() in text:
             safety.append(f"contains '{phrase.strip()}'")
     return not quality and not safety, quality, safety

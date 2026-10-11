@@ -3,9 +3,9 @@
   "prompt_sha256": "85e5cb1d7efb85ccf4968ae0c0e6fb837cb8e2859afb999fbb006008cf8da148",
   "model": "gpt-4o-mini-2024-07-18",
   "temperature": 0,
-  "golden_sha256": "e4ea2fbff1eaa36cebc8635d85da9f16d4c751ef5b4a35f8a6e079ec83054a5e",
+  "golden_sha256": "e57339dbd7c6370de4d03d9bd758ede56203a85186af32c3b030629f981b4452",
   "n": 30,
-  "recorded_at": "2026-10-11T17:03:58+00:00",
+  "recorded_at": "2026-10-11T17:38:23+00:00",
   "by_id": {
     "g01": {
       "urgency": "high",
@@ -87,9 +87,9 @@
     },
     "g14": {
       "urgency": "medium",
-      "advice": "Please see a clinician within 24 hours for evaluation and treatment.",
+      "advice": "Please see a clinician within 24 hours to evaluate your toothache and swelling.",
       "tokens_in": 126,
-      "tokens_out": 26
+      "tokens_out": 29
     },
     "g15": {
       "urgency": "medium",
@@ -111,21 +111,21 @@
     },
     "g18": {
       "urgency": "medium",
-      "advice": "Please see a clinician within 24 hours for evaluation of the rash and fever.",
+      "advice": "Please see a clinician within 24 hours to evaluate the rash and fever.",
       "tokens_in": 128,
-      "tokens_out": 29
+      "tokens_out": 28
     },
     "g19": {
       "urgency": "low",
-      "advice": "Take a break, rest, and stay hydrated. Monitor your symptoms and seek medical attention if they worsen.",
+      "advice": "Take a break, rest, and stay hydrated. Monitor your symptoms and consider seeing a clinician if the headache persists.",
       "tokens_in": 124,
-      "tokens_out": 34
+      "tokens_out": 36
     },
     "g20": {
       "urgency": "low",
-      "advice": "Monitor your symptoms and consider using saline nasal drops or a humidifier to help with your runny nose.",
+      "advice": "Monitor your symptoms and consider using saline nasal drops or staying hydrated.",
       "tokens_in": 127,
-      "tokens_out": 34
+      "tokens_out": 26
     },
     "g21": {
       "urgency": "low",
@@ -147,9 +147,9 @@
     },
     "g24": {
       "urgency": "low",
-      "advice": "Apply soothing lotion or aloe vera to the affected area and keep it moisturized. Monitor for any signs of worsening or infection.",
+      "advice": "Apply soothing lotion or aloe vera to the affected area and keep it moisturized. Monitor for any worsening symptoms.",
       "tokens_in": 131,
-      "tokens_out": 38
+      "tokens_out": 35
     },
     "g25": {
       "urgency": "low",
@@ -159,21 +159,21 @@
     },
     "g26": {
       "urgency": "low",
-      "advice": "You can try self-care measures such as resting in a quiet, dark room and staying hydrated. Monitor your symptoms, and if the headache persists or worsens, consider seeing a clinician.",
+      "advice": "You can try self-care measures such as resting in a quiet, dark room and staying hydrated. Monitor your symptoms, and if they worsen or persist, consider seeing a clinician.",
       "tokens_in": 133,
-      "tokens_out": 50
+      "tokens_out": 48
     },
     "g27": {
       "urgency": "low",
-      "advice": "Monitor your symptoms and maintain hydration. If you have concerns or develop new symptoms, consider consulting a clinician.",
+      "advice": "Please monitor your symptoms and stay hydrated. If you have concerns or your condition worsens, consider consulting a clinician.",
       "tokens_in": 130,
-      "tokens_out": 34
+      "tokens_out": 36
     },
     "g28": {
       "urgency": "medium",
-      "advice": "Tafadhali tembelea kliniki ndani ya masaa 24 kwa uchunguzi zaidi.",
+      "advice": "Please see a clinician within 24 hours for further evaluation.",
       "tokens_in": 129,
-      "tokens_out": 34
+      "tokens_out": 25
     },
     "g29": {
       "urgency": "high",
@@ -183,9 +183,9 @@
     },
     "g30": {
       "urgency": "low",
-      "advice": "Monitor your symptoms and ensure you stay hydrated. If the cough persists or worsens, consider seeing a clinician.",
+      "advice": "Monitor your symptoms and ensure you stay hydrated. If your cough worsens or you develop new symptoms, consider seeing a clinician.",
       "tokens_in": 129,
-      "tokens_out": 35
+      "tokens_out": 38
     }
   }
 }

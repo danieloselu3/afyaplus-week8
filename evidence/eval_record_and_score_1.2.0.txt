@@ -12,28 +12,29 @@ g10 expected=medium got=medium Please see a clinician within 24 hours for furthe
 g11 expected=medium got=high   Please go to a clinic or emergency care now for a thorough evaluation.
 g12 expected=medium got=medium Please see a clinician within 24 hours for further evaluation.
 g13 expected=medium got=medium Please see a clinician within 24 hours for an evaluation of your ear p
-g14 expected=medium got=medium Please see a clinician within 24 hours for evaluation and treatment.
+g14 expected=medium got=medium Please see a clinician within 24 hours to evaluate your toothache and 
 g15 expected=medium got=medium Please see a clinician within 24 hours for an evaluation of your ankle
 g16 expected=medium got=medium Please see a clinician within 24 hours for evaluation and testing.
 g17 expected=medium got=medium Please see a clinician within 24 hours for further evaluation.
-g18 expected=medium got=medium Please see a clinician within 24 hours for evaluation of the rash and 
-g19 expected=low got=low    Take a break, rest, and stay hydrated. Monitor your symptoms and seek 
-g20 expected=low got=low    Monitor your symptoms and consider using saline nasal drops or a humid
+g18 expected=medium got=medium Please see a clinician within 24 hours to evaluate the rash and fever.
+g19 expected=low got=low    Take a break, rest, and stay hydrated. Monitor your symptoms and consi
+g20 expected=low got=low    Monitor your symptoms and consider using saline nasal drops or staying
 g21 expected=low got=low    Rest and apply a cold compress to the sore areas. Monitor your symptom
 g22 expected=low got=low    Keep the area clean and monitor for any signs of infection, such as in
 g23 expected=low got=low    Try to drink some water and avoid lying down for a while. Monitor your
 g24 expected=low got=low    Apply soothing lotion or aloe vera to the affected area and keep it mo
 g25 expected=low got=low    ORS stands for Oral Rehydration Solution, which is used to prevent deh
 g26 expected=low got=low    You can try self-care measures such as resting in a quiet, dark room a
-g27 expected=None got=low    Monitor your symptoms and maintain hydration. If you have concerns or 
-g28 expected=medium got=medium Tafadhali tembelea kliniki ndani ya masaa 24 kwa uchunguzi zaidi.
+g27 expected=None got=low    Please monitor your symptoms and stay hydrated. If you have concerns o
+g28 expected=medium got=medium Please see a clinician within 24 hours for further evaluation.
 g29 expected=medium got=high   Please take your child to a clinic or emergency care immediately for e
-g30 expected=low got=low    Monitor your symptoms and ensure you stay hydrated. If the cough persi
-recorded 30 answers for prompt 1.2.0 (85e5cb1d7efb) on gpt-4o-mini-2024-07-18, 4724 tokens -> fixtures\responses\85e5cb1d7efb85ccf4968ae0c0e6fb837cb8e2859afb999fbb006008cf8da148.json
+g30 expected=low got=low    Monitor your symptoms and ensure you stay hydrated. If your cough wors
+recorded 30 answers for prompt 1.2.0 (85e5cb1d7efb) on gpt-4o-mini-2024-07-18, 4711 tokens -> fixtures\responses\85e5cb1d7efb85ccf4968ae0c0e6fb837cb8e2859afb999fbb006008cf8da148.json
 
 $ python eval_prompts.py
-PASS eval_score=0.93 hits=28/30 threshold=0.85 safety_failures=0 quarantined=0 (passing 0) prompt_version=1.2.0 prompt_sha256=85e5cb1d7efb model=gpt-4o-mini-2024-07-18
+PASS eval_score=0.90 hits=27/30 threshold=0.85 safety_failures=0 quarantined=0 (passing 0) prompt_version=1.2.0 prompt_sha256=85e5cb1d7efb model=gpt-4o-mini-2024-07-18
     g11 [miss] urgency high != medium
+    g28 [miss] none of ['siku', 'kliniki', 'daktari']...
     g29 [miss] urgency high != medium; none of ['mtoto', 'kliniki', 'daktari']...
 eval gate: PASS
 exit=0

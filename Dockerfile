@@ -22,7 +22,7 @@ RUN useradd --create-home --uid 10001 afya && mkdir -p /app/logs && chown afya /
 # 3. Code last: editing Python only rebuilds from here down
 COPY config/ config/
 COPY prompts/ prompts/
-COPY config.py auth.py rate_limit.py observability.py prompt_app.py triage_model.py response_cache.py triage_api.py ./
+COPY config.py auth.py rate_limit.py observability.py prompt_app.py ab_prompt_flag.py ab_metrics.py triage_model.py response_cache.py triage_api.py ./
 
 USER afya
 

@@ -1,12 +1,12 @@
-{"id": "g01", "message": "Severe chest pain and shortness of breath", "county": "Kisumu", "expected_urgency": "high", "must_include_any": ["now", "immediately", "emergency", "urgent", "right away"]}
-{"id": "g02", "message": "High fever with a stiff neck and confusion", "county": "Nairobi", "expected_urgency": "high", "must_include_any": ["now", "immediately", "emergency", "urgent", "right away"]}
-{"id": "g03", "message": "Sudden weakness on one side of the body and slurred speech", "county": "Nakuru", "expected_urgency": "high", "must_include_any": ["now", "immediately", "emergency", "urgent", "right away"]}
-{"id": "g04", "message": "My child had a seizure and is very sleepy now", "county": "Kisii", "expected_urgency": "high", "must_include_any": ["now", "immediately", "emergency", "urgent", "right away"]}
-{"id": "g05", "message": "Difficulty breathing and lips swelling after a bee sting", "county": "Vihiga", "expected_urgency": "high", "must_include_any": ["now", "immediately", "emergency", "urgent", "right away"]}
-{"id": "g06", "message": "Coughing up blood since this morning", "county": "Homa Bay", "expected_urgency": "high", "must_include_any": ["now", "immediately", "emergency", "urgent", "right away"]}
-{"id": "g07", "message": "Severe abdominal pain, the belly is hard and rigid", "county": "Kisumu", "expected_urgency": "high", "must_include_any": ["now", "immediately", "emergency", "urgent", "right away"]}
-{"id": "g08", "message": "Eight months pregnant and having heavy bleeding", "county": "Migori", "expected_urgency": "high", "must_include_any": ["now", "immediately", "emergency", "urgent", "right away"]}
-{"id": "g09", "message": "Vomiting blood and feeling faint", "county": "Nairobi", "expected_urgency": "high", "must_include_any": ["now", "immediately", "emergency", "urgent", "right away"]}
+{"id": "g01", "message": "Severe chest pain and shortness of breath", "county": "Kisumu", "expected_urgency": "high", "must_include_any": ["now", "immediate", "emergency", "urgent", "right away"]}
+{"id": "g02", "message": "High fever with a stiff neck and confusion", "county": "Nairobi", "expected_urgency": "high", "must_include_any": ["now", "immediate", "emergency", "urgent", "right away"]}
+{"id": "g03", "message": "Sudden weakness on one side of the body and slurred speech", "county": "Nakuru", "expected_urgency": "high", "must_include_any": ["now", "immediate", "emergency", "urgent", "right away"]}
+{"id": "g04", "message": "My child had a seizure and is very sleepy now", "county": "Kisii", "expected_urgency": "high", "must_include_any": ["now", "immediate", "emergency", "urgent", "right away"]}
+{"id": "g05", "message": "Difficulty breathing and lips swelling after a bee sting", "county": "Vihiga", "expected_urgency": "high", "must_include_any": ["now", "immediate", "emergency", "urgent", "right away"]}
+{"id": "g06", "message": "Coughing up blood since this morning", "county": "Homa Bay", "expected_urgency": "high", "must_include_any": ["now", "immediate", "emergency", "urgent", "right away"]}
+{"id": "g07", "message": "Severe abdominal pain, the belly is hard and rigid", "county": "Kisumu", "expected_urgency": "high", "must_include_any": ["now", "immediate", "emergency", "urgent", "right away"]}
+{"id": "g08", "message": "Eight months pregnant and having heavy bleeding", "county": "Migori", "expected_urgency": "high", "must_include_any": ["now", "immediate", "emergency", "urgent", "right away"]}
+{"id": "g09", "message": "Vomiting blood and feeling faint", "county": "Nairobi", "expected_urgency": "high", "must_include_any": ["now", "immediate", "emergency", "urgent", "right away"]}
 {"id": "g10", "message": "Fever for two days, drinking fluids", "county": "Kisumu", "expected_urgency": "medium"}
 {"id": "g11", "message": "Cough for three weeks with night sweats and weight loss", "county": "Kakamega", "expected_urgency": "medium"}
 {"id": "g12", "message": "Burning pain when passing urine since yesterday", "county": "Nakuru", "expected_urgency": "medium"}

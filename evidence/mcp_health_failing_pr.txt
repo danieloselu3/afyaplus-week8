@@ -1,0 +1,23 @@
+PR #2 (deliberate failing demo): https://github.com/danieloselu3/afyaplus-week8/pull/2
+CI run: https://github.com/danieloselu3/afyaplus-week8/actions/runs/38160162563
+Change: logistics_mcp_versioned.py  mcp.run() -> mcp.run(transport="streamable-http")
+
+$ gh run view 38160162563 --json jobs
+  lint-test: success
+  eval: success
+  mcp-health: failure
+  build: skipped
+  deploy-staging: skipped
+  deploy-production: skipped
+
+$ gh run view 38160162563 --log-failed   (mcp-health)
+##[group]Run python scripts/check_mcp_health.py
+python scripts/check_mcp_health.py
+MCP HEALTH FAILED
+  - probe failed before a healthy handshake: TimeoutError: 
+##[error]Process completed with exit code 1.
+
+$ gh pr view 2 --json mergeStateStatus
+BLOCKED
+
+Unit tests on the same change, locally: 93 passed (they use the in-memory transport).
