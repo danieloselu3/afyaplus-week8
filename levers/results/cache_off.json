@@ -1,0 +1,1023 @@
+{
+  "summary": {
+    "mode": "off",
+    "backend": "openai",
+    "fixture": "fixtures/traffic_100.json",
+    "n": 100,
+    "unique": 40,
+    "hits": 0,
+    "misses": 100,
+    "hit_rate": 0.0,
+    "model_calls": 100,
+    "tokens_in": 12274,
+    "tokens_out": 3116,
+    "usd_total": 0.003711,
+    "usd_per_1k_tokens_only": 0.0371,
+    "latency_ms_p50": 974.7,
+    "latency_ms_p95": 1476.1,
+    "latency_ms_mean": 1043.3,
+    "date": "2026-10-11"
+  },
+  "calls": [
+    {
+      "i": 0,
+      "message": "Blurred vision since this morning",
+      "cache": "BYPASS",
+      "ms": 3337.1,
+      "urgency": "high",
+      "tokens_in": 123,
+      "tokens_out": 29,
+      "usd": 3.585e-05
+    },
+    {
+      "i": 1,
+      "message": "Chest pain radiating to left arm",
+      "cache": "BYPASS",
+      "ms": 1198.2,
+      "urgency": "high",
+      "tokens_in": 124,
+      "tokens_out": 22,
+      "usd": 3.18e-05
+    },
+    {
+      "i": 2,
+      "message": "Mild seasonal allergy symptoms",
+      "cache": "BYPASS",
+      "ms": 1044.8,
+      "urgency": "low",
+      "tokens_in": 121,
+      "tokens_out": 35,
+      "usd": 3.9149999999999996e-05
+    },
+    {
+      "i": 3,
+      "message": "Mild headache after missing lunch",
+      "cache": "BYPASS",
+      "ms": 1476.1,
+      "urgency": "low",
+      "tokens_in": 122,
+      "tokens_out": 33,
+      "usd": 3.8100000000000005e-05
+    },
+    {
+      "i": 4,
+      "message": "Ear pain and mild hearing loss",
+      "cache": "BYPASS",
+      "ms": 1262.4,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 30,
+      "usd": 3.6450000000000005e-05
+    },
+    {
+      "i": 5,
+      "message": "Rash spreading on the forearm",
+      "cache": "BYPASS",
+      "ms": 1177.1,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 31,
+      "usd": 3.705e-05
+    },
+    {
+      "i": 6,
+      "message": "Sunburn on shoulders",
+      "cache": "BYPASS",
+      "ms": 1151.5,
+      "urgency": "low",
+      "tokens_in": 121,
+      "tokens_out": 38,
+      "usd": 4.0950000000000006e-05
+    },
+    {
+      "i": 7,
+      "message": "High fever with stiff neck",
+      "cache": "BYPASS",
+      "ms": 1025.2,
+      "urgency": "high",
+      "tokens_in": 122,
+      "tokens_out": 22,
+      "usd": 3.15e-05
+    },
+    {
+      "i": 8,
+      "message": "Child with diarrhoea since morning",
+      "cache": "BYPASS",
+      "ms": 1004.0,
+      "urgency": "medium",
+      "tokens_in": 124,
+      "tokens_out": 38,
+      "usd": 4.14e-05
+    },
+    {
+      "i": 9,
+      "message": "Fever for two days, drinking fluids",
+      "cache": "BYPASS",
+      "ms": 938.1,
+      "urgency": "medium",
+      "tokens_in": 124,
+      "tokens_out": 25,
+      "usd": 3.36e-05
+    },
+    {
+      "i": 10,
+      "message": "Mild anxiety before an exam",
+      "cache": "BYPASS",
+      "ms": 1111.7,
+      "urgency": "low",
+      "tokens_in": 122,
+      "tokens_out": 30,
+      "usd": 3.6299999999999995e-05
+    },
+    {
+      "i": 11,
+      "message": "Severe abdominal pain, rigid",
+      "cache": "BYPASS",
+      "ms": 913.9,
+      "urgency": "high",
+      "tokens_in": 122,
+      "tokens_out": 22,
+      "usd": 3.15e-05
+    },
+    {
+      "i": 12,
+      "message": "Severe abdominal pain, rigid",
+      "cache": "BYPASS",
+      "ms": 800.9,
+      "urgency": "high",
+      "tokens_in": 122,
+      "tokens_out": 22,
+      "usd": 3.15e-05
+    },
+    {
+      "i": 13,
+      "message": "Dizziness on standing up quickly",
+      "cache": "BYPASS",
+      "ms": 1849.0,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 31,
+      "usd": 3.705e-05
+    },
+    {
+      "i": 14,
+      "message": "Cut on hand, bleeding stopped",
+      "cache": "BYPASS",
+      "ms": 1072.5,
+      "urgency": "high",
+      "tokens_in": 123,
+      "tokens_out": 37,
+      "usd": 4.065e-05
+    },
+    {
+      "i": 15,
+      "message": "Sprained wrist from a fall",
+      "cache": "BYPASS",
+      "ms": 1436.7,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 37,
+      "usd": 4.065e-05
+    },
+    {
+      "i": 16,
+      "message": "Hiccups lasting one hour",
+      "cache": "BYPASS",
+      "ms": 914.1,
+      "urgency": "low",
+      "tokens_in": 123,
+      "tokens_out": 35,
+      "usd": 3.9450000000000003e-05
+    },
+    {
+      "i": 17,
+      "message": "Mild headache after missing lunch",
+      "cache": "BYPASS",
+      "ms": 920.7,
+      "urgency": "low",
+      "tokens_in": 122,
+      "tokens_out": 32,
+      "usd": 3.75e-05
+    },
+    {
+      "i": 18,
+      "message": "Sprained wrist from a fall",
+      "cache": "BYPASS",
+      "ms": 973.0,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 30,
+      "usd": 3.6450000000000005e-05
+    },
+    {
+      "i": 19,
+      "message": "Ear pain and mild hearing loss",
+      "cache": "BYPASS",
+      "ms": 899.2,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 30,
+      "usd": 3.6450000000000005e-05
+    },
+    {
+      "i": 20,
+      "message": "Mild headache after missing lunch",
+      "cache": "BYPASS",
+      "ms": 910.6,
+      "urgency": "low",
+      "tokens_in": 122,
+      "tokens_out": 39,
+      "usd": 4.1700000000000004e-05
+    },
+    {
+      "i": 21,
+      "message": "Heartburn after a heavy meal",
+      "cache": "BYPASS",
+      "ms": 976.0,
+      "urgency": "low",
+      "tokens_in": 123,
+      "tokens_out": 38,
+      "usd": 4.125e-05
+    },
+    {
+      "i": 22,
+      "message": "Mild seasonal allergy symptoms",
+      "cache": "BYPASS",
+      "ms": 977.3,
+      "urgency": "low",
+      "tokens_in": 121,
+      "tokens_out": 35,
+      "usd": 3.9149999999999996e-05
+    },
+    {
+      "i": 23,
+      "message": "Hiccups lasting one hour",
+      "cache": "BYPASS",
+      "ms": 827.7,
+      "urgency": "low",
+      "tokens_in": 123,
+      "tokens_out": 35,
+      "usd": 3.9450000000000003e-05
+    },
+    {
+      "i": 24,
+      "message": "High fever with stiff neck",
+      "cache": "BYPASS",
+      "ms": 917.1,
+      "urgency": "high",
+      "tokens_in": 122,
+      "tokens_out": 22,
+      "usd": 3.15e-05
+    },
+    {
+      "i": 25,
+      "message": "Sunburn on shoulders",
+      "cache": "BYPASS",
+      "ms": 1007.0,
+      "urgency": "low",
+      "tokens_in": 121,
+      "tokens_out": 37,
+      "usd": 4.034999999999999e-05
+    },
+    {
+      "i": 26,
+      "message": "Swollen ankle, cannot bear weight",
+      "cache": "BYPASS",
+      "ms": 1717.3,
+      "urgency": "high",
+      "tokens_in": 124,
+      "tokens_out": 25,
+      "usd": 3.36e-05
+    },
+    {
+      "i": 27,
+      "message": "Cut on hand, bleeding stopped",
+      "cache": "BYPASS",
+      "ms": 1027.9,
+      "urgency": "high",
+      "tokens_in": 123,
+      "tokens_out": 43,
+      "usd": 4.425e-05
+    },
+    {
+      "i": 28,
+      "message": "Ear pain and mild hearing loss",
+      "cache": "BYPASS",
+      "ms": 853.5,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 30,
+      "usd": 3.6450000000000005e-05
+    },
+    {
+      "i": 29,
+      "message": "Child with diarrhoea since morning",
+      "cache": "BYPASS",
+      "ms": 996.0,
+      "urgency": "medium",
+      "tokens_in": 124,
+      "tokens_out": 38,
+      "usd": 4.14e-05
+    },
+    {
+      "i": 30,
+      "message": "Child with diarrhoea since morning",
+      "cache": "BYPASS",
+      "ms": 1669.5,
+      "urgency": "medium",
+      "tokens_in": 124,
+      "tokens_out": 38,
+      "usd": 4.14e-05
+    },
+    {
+      "i": 31,
+      "message": "Sprained wrist from a fall",
+      "cache": "BYPASS",
+      "ms": 991.9,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 30,
+      "usd": 3.6450000000000005e-05
+    },
+    {
+      "i": 32,
+      "message": "Feeling tired, no other symptoms",
+      "cache": "BYPASS",
+      "ms": 962.2,
+      "urgency": "low",
+      "tokens_in": 123,
+      "tokens_out": 32,
+      "usd": 3.765e-05
+    },
+    {
+      "i": 33,
+      "message": "Chest tightness at rest",
+      "cache": "BYPASS",
+      "ms": 820.9,
+      "urgency": "high",
+      "tokens_in": 122,
+      "tokens_out": 22,
+      "usd": 3.15e-05
+    },
+    {
+      "i": 34,
+      "message": "Mild anxiety before an exam",
+      "cache": "BYPASS",
+      "ms": 1016.7,
+      "urgency": "low",
+      "tokens_in": 122,
+      "tokens_out": 30,
+      "usd": 3.6299999999999995e-05
+    },
+    {
+      "i": 35,
+      "message": "Sore throat, no fever",
+      "cache": "BYPASS",
+      "ms": 1171.1,
+      "urgency": "low",
+      "tokens_in": 123,
+      "tokens_out": 39,
+      "usd": 4.1849999999999994e-05
+    },
+    {
+      "i": 36,
+      "message": "Heartburn after a heavy meal",
+      "cache": "BYPASS",
+      "ms": 1080.6,
+      "urgency": "low",
+      "tokens_in": 123,
+      "tokens_out": 38,
+      "usd": 4.125e-05
+    },
+    {
+      "i": 37,
+      "message": "Dizziness on standing up quickly",
+      "cache": "BYPASS",
+      "ms": 970.0,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 31,
+      "usd": 3.705e-05
+    },
+    {
+      "i": 38,
+      "message": "Mild headache after missing lunch",
+      "cache": "BYPASS",
+      "ms": 1052.1,
+      "urgency": "low",
+      "tokens_in": 122,
+      "tokens_out": 28,
+      "usd": 3.51e-05
+    },
+    {
+      "i": 39,
+      "message": "Chest pain radiating to left arm",
+      "cache": "BYPASS",
+      "ms": 767.5,
+      "urgency": "high",
+      "tokens_in": 124,
+      "tokens_out": 22,
+      "usd": 3.18e-05
+    },
+    {
+      "i": 40,
+      "message": "Sore throat, no fever",
+      "cache": "BYPASS",
+      "ms": 1030.7,
+      "urgency": "low",
+      "tokens_in": 123,
+      "tokens_out": 42,
+      "usd": 4.365e-05
+    },
+    {
+      "i": 41,
+      "message": "Runny nose and sneezing",
+      "cache": "BYPASS",
+      "ms": 1117.4,
+      "urgency": "low",
+      "tokens_in": 123,
+      "tokens_out": 35,
+      "usd": 3.9450000000000003e-05
+    },
+    {
+      "i": 42,
+      "message": "Sunburn on shoulders",
+      "cache": "BYPASS",
+      "ms": 1080.0,
+      "urgency": "low",
+      "tokens_in": 121,
+      "tokens_out": 38,
+      "usd": 4.0950000000000006e-05
+    },
+    {
+      "i": 43,
+      "message": "Rash spreading on the forearm",
+      "cache": "BYPASS",
+      "ms": 903.0,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 26,
+      "usd": 3.4049999999999994e-05
+    },
+    {
+      "i": 44,
+      "message": "Common cold symptoms, no fever",
+      "cache": "BYPASS",
+      "ms": 979.4,
+      "urgency": "low",
+      "tokens_in": 123,
+      "tokens_out": 41,
+      "usd": 4.3049999999999996e-05
+    },
+    {
+      "i": 45,
+      "message": "Persistent cough for a week",
+      "cache": "BYPASS",
+      "ms": 886.6,
+      "urgency": "medium",
+      "tokens_in": 122,
+      "tokens_out": 25,
+      "usd": 3.3299999999999996e-05
+    },
+    {
+      "i": 46,
+      "message": "Difficulty breathing after a bee sting",
+      "cache": "BYPASS",
+      "ms": 765.9,
+      "urgency": "high",
+      "tokens_in": 123,
+      "tokens_out": 22,
+      "usd": 3.165e-05
+    },
+    {
+      "i": 47,
+      "message": "Sprained wrist from a fall",
+      "cache": "BYPASS",
+      "ms": 902.7,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 30,
+      "usd": 3.6450000000000005e-05
+    },
+    {
+      "i": 48,
+      "message": "Coughing up blood",
+      "cache": "BYPASS",
+      "ms": 886.1,
+      "urgency": "high",
+      "tokens_in": 122,
+      "tokens_out": 22,
+      "usd": 3.15e-05
+    },
+    {
+      "i": 49,
+      "message": "Nosebleed that stopped on its own",
+      "cache": "BYPASS",
+      "ms": 1041.9,
+      "urgency": "low",
+      "tokens_in": 125,
+      "tokens_out": 38,
+      "usd": 4.155e-05
+    },
+    {
+      "i": 50,
+      "message": "Persistent vomiting since last night",
+      "cache": "BYPASS",
+      "ms": 952.0,
+      "urgency": "high",
+      "tokens_in": 122,
+      "tokens_out": 25,
+      "usd": 3.3299999999999996e-05
+    },
+    {
+      "i": 51,
+      "message": "Sore muscles after exercise",
+      "cache": "BYPASS",
+      "ms": 1017.6,
+      "urgency": "low",
+      "tokens_in": 122,
+      "tokens_out": 32,
+      "usd": 3.75e-05
+    },
+    {
+      "i": 52,
+      "message": "Chest tightness at rest",
+      "cache": "BYPASS",
+      "ms": 913.7,
+      "urgency": "high",
+      "tokens_in": 122,
+      "tokens_out": 22,
+      "usd": 3.15e-05
+    },
+    {
+      "i": 53,
+      "message": "Low-grade fever with body aches",
+      "cache": "BYPASS",
+      "ms": 782.7,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 25,
+      "usd": 3.345e-05
+    },
+    {
+      "i": 54,
+      "message": "Stomach pain after eating",
+      "cache": "BYPASS",
+      "ms": 942.2,
+      "urgency": "medium",
+      "tokens_in": 122,
+      "tokens_out": 34,
+      "usd": 3.8700000000000006e-05
+    },
+    {
+      "i": 55,
+      "message": "Persistent vomiting since last night",
+      "cache": "BYPASS",
+      "ms": 783.3,
+      "urgency": "high",
+      "tokens_in": 122,
+      "tokens_out": 25,
+      "usd": 3.3299999999999996e-05
+    },
+    {
+      "i": 56,
+      "message": "Mild headache after missing lunch",
+      "cache": "BYPASS",
+      "ms": 857.3,
+      "urgency": "low",
+      "tokens_in": 122,
+      "tokens_out": 36,
+      "usd": 3.99e-05
+    },
+    {
+      "i": 57,
+      "message": "Minor scrape on the knee",
+      "cache": "BYPASS",
+      "ms": 1091.2,
+      "urgency": "low",
+      "tokens_in": 122,
+      "tokens_out": 36,
+      "usd": 3.99e-05
+    },
+    {
+      "i": 58,
+      "message": "Mild headache after missing lunch",
+      "cache": "BYPASS",
+      "ms": 1052.5,
+      "urgency": "low",
+      "tokens_in": 122,
+      "tokens_out": 36,
+      "usd": 3.99e-05
+    },
+    {
+      "i": 59,
+      "message": "Chest pain radiating to left arm",
+      "cache": "BYPASS",
+      "ms": 900.4,
+      "urgency": "high",
+      "tokens_in": 124,
+      "tokens_out": 22,
+      "usd": 3.18e-05
+    },
+    {
+      "i": 60,
+      "message": "Chest tightness at rest",
+      "cache": "BYPASS",
+      "ms": 855.8,
+      "urgency": "high",
+      "tokens_in": 122,
+      "tokens_out": 22,
+      "usd": 3.15e-05
+    },
+    {
+      "i": 61,
+      "message": "Hiccups lasting one hour",
+      "cache": "BYPASS",
+      "ms": 1264.9,
+      "urgency": "low",
+      "tokens_in": 123,
+      "tokens_out": 35,
+      "usd": 3.9450000000000003e-05
+    },
+    {
+      "i": 62,
+      "message": "Insect bite with local swelling",
+      "cache": "BYPASS",
+      "ms": 943.8,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 30,
+      "usd": 3.6450000000000005e-05
+    },
+    {
+      "i": 63,
+      "message": "Nosebleed that stopped on its own",
+      "cache": "BYPASS",
+      "ms": 1145.6,
+      "urgency": "low",
+      "tokens_in": 125,
+      "tokens_out": 38,
+      "usd": 4.155e-05
+    },
+    {
+      "i": 64,
+      "message": "Low-grade fever with body aches",
+      "cache": "BYPASS",
+      "ms": 1031.2,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 25,
+      "usd": 3.345e-05
+    },
+    {
+      "i": 65,
+      "message": "Shortness of breath climbing stairs",
+      "cache": "BYPASS",
+      "ms": 906.9,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 26,
+      "usd": 3.4049999999999994e-05
+    },
+    {
+      "i": 66,
+      "message": "Nosebleed that stopped on its own",
+      "cache": "BYPASS",
+      "ms": 1214.3,
+      "urgency": "low",
+      "tokens_in": 125,
+      "tokens_out": 38,
+      "usd": 4.155e-05
+    },
+    {
+      "i": 67,
+      "message": "Mild anxiety before an exam",
+      "cache": "BYPASS",
+      "ms": 915.6,
+      "urgency": "low",
+      "tokens_in": 122,
+      "tokens_out": 30,
+      "usd": 3.6299999999999995e-05
+    },
+    {
+      "i": 68,
+      "message": "Chest pain radiating to left arm",
+      "cache": "BYPASS",
+      "ms": 785.3,
+      "urgency": "high",
+      "tokens_in": 124,
+      "tokens_out": 22,
+      "usd": 3.18e-05
+    },
+    {
+      "i": 69,
+      "message": "Mild seasonal allergy symptoms",
+      "cache": "BYPASS",
+      "ms": 976.7,
+      "urgency": "low",
+      "tokens_in": 121,
+      "tokens_out": 35,
+      "usd": 3.9149999999999996e-05
+    },
+    {
+      "i": 70,
+      "message": "High fever with stiff neck",
+      "cache": "BYPASS",
+      "ms": 1043.2,
+      "urgency": "high",
+      "tokens_in": 122,
+      "tokens_out": 22,
+      "usd": 3.15e-05
+    },
+    {
+      "i": 71,
+      "message": "Mild burn on the forearm",
+      "cache": "BYPASS",
+      "ms": 1275.2,
+      "urgency": "low",
+      "tokens_in": 123,
+      "tokens_out": 38,
+      "usd": 4.125e-05
+    },
+    {
+      "i": 72,
+      "message": "Twisted ankle, mild swelling",
+      "cache": "BYPASS",
+      "ms": 904.4,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 30,
+      "usd": 3.6450000000000005e-05
+    },
+    {
+      "i": 73,
+      "message": "Nosebleed that stopped on its own",
+      "cache": "BYPASS",
+      "ms": 1140.8,
+      "urgency": "low",
+      "tokens_in": 125,
+      "tokens_out": 38,
+      "usd": 4.155e-05
+    },
+    {
+      "i": 74,
+      "message": "Mild anxiety before an exam",
+      "cache": "BYPASS",
+      "ms": 891.3,
+      "urgency": "low",
+      "tokens_in": 122,
+      "tokens_out": 30,
+      "usd": 3.6299999999999995e-05
+    },
+    {
+      "i": 75,
+      "message": "Mild burn on the forearm",
+      "cache": "BYPASS",
+      "ms": 1127.0,
+      "urgency": "low",
+      "tokens_in": 123,
+      "tokens_out": 38,
+      "usd": 4.125e-05
+    },
+    {
+      "i": 76,
+      "message": "Hiccups lasting one hour",
+      "cache": "BYPASS",
+      "ms": 907.4,
+      "urgency": "low",
+      "tokens_in": 123,
+      "tokens_out": 35,
+      "usd": 3.9450000000000003e-05
+    },
+    {
+      "i": 77,
+      "message": "Sudden weakness on one side",
+      "cache": "BYPASS",
+      "ms": 1004.7,
+      "urgency": "high",
+      "tokens_in": 123,
+      "tokens_out": 22,
+      "usd": 3.165e-05
+    },
+    {
+      "i": 78,
+      "message": "Twisted ankle, mild swelling",
+      "cache": "BYPASS",
+      "ms": 873.7,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 30,
+      "usd": 3.6450000000000005e-05
+    },
+    {
+      "i": 79,
+      "message": "Hiccups lasting one hour",
+      "cache": "BYPASS",
+      "ms": 929.1,
+      "urgency": "low",
+      "tokens_in": 123,
+      "tokens_out": 35,
+      "usd": 3.9450000000000003e-05
+    },
+    {
+      "i": 80,
+      "message": "Back pain after lifting a jerry can",
+      "cache": "BYPASS",
+      "ms": 847.5,
+      "urgency": "medium",
+      "tokens_in": 125,
+      "tokens_out": 27,
+      "usd": 3.495e-05
+    },
+    {
+      "i": 81,
+      "message": "Stomach pain after eating",
+      "cache": "BYPASS",
+      "ms": 917.6,
+      "urgency": "medium",
+      "tokens_in": 122,
+      "tokens_out": 34,
+      "usd": 3.8700000000000006e-05
+    },
+    {
+      "i": 82,
+      "message": "Stomach pain after eating",
+      "cache": "BYPASS",
+      "ms": 937.2,
+      "urgency": "medium",
+      "tokens_in": 122,
+      "tokens_out": 34,
+      "usd": 3.8700000000000006e-05
+    },
+    {
+      "i": 83,
+      "message": "Mild anxiety before an exam",
+      "cache": "BYPASS",
+      "ms": 1022.0,
+      "urgency": "low",
+      "tokens_in": 122,
+      "tokens_out": 30,
+      "usd": 3.6299999999999995e-05
+    },
+    {
+      "i": 84,
+      "message": "Back pain after lifting a jerry can",
+      "cache": "BYPASS",
+      "ms": 906.3,
+      "urgency": "medium",
+      "tokens_in": 125,
+      "tokens_out": 27,
+      "usd": 3.495e-05
+    },
+    {
+      "i": 85,
+      "message": "Mild headache after missing lunch",
+      "cache": "BYPASS",
+      "ms": 1441.5,
+      "urgency": "low",
+      "tokens_in": 122,
+      "tokens_out": 33,
+      "usd": 3.8100000000000005e-05
+    },
+    {
+      "i": 86,
+      "message": "Sore throat, no fever",
+      "cache": "BYPASS",
+      "ms": 1162.1,
+      "urgency": "low",
+      "tokens_in": 123,
+      "tokens_out": 42,
+      "usd": 4.365e-05
+    },
+    {
+      "i": 87,
+      "message": "Mild anxiety before an exam",
+      "cache": "BYPASS",
+      "ms": 967.4,
+      "urgency": "low",
+      "tokens_in": 122,
+      "tokens_out": 30,
+      "usd": 3.6299999999999995e-05
+    },
+    {
+      "i": 88,
+      "message": "Dizziness on standing up quickly",
+      "cache": "BYPASS",
+      "ms": 1054.1,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 31,
+      "usd": 3.705e-05
+    },
+    {
+      "i": 89,
+      "message": "Sunburn on shoulders",
+      "cache": "BYPASS",
+      "ms": 974.7,
+      "urgency": "low",
+      "tokens_in": 121,
+      "tokens_out": 38,
+      "usd": 4.0950000000000006e-05
+    },
+    {
+      "i": 90,
+      "message": "Toothache for three days",
+      "cache": "BYPASS",
+      "ms": 974.9,
+      "urgency": "medium",
+      "tokens_in": 122,
+      "tokens_out": 27,
+      "usd": 3.45e-05
+    },
+    {
+      "i": 91,
+      "message": "Runny nose and sneezing",
+      "cache": "BYPASS",
+      "ms": 957.9,
+      "urgency": "low",
+      "tokens_in": 123,
+      "tokens_out": 34,
+      "usd": 3.8849999999999996e-05
+    },
+    {
+      "i": 92,
+      "message": "Rash spreading on the forearm",
+      "cache": "BYPASS",
+      "ms": 871.7,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 26,
+      "usd": 3.4049999999999994e-05
+    },
+    {
+      "i": 93,
+      "message": "Severe abdominal pain, rigid",
+      "cache": "BYPASS",
+      "ms": 781.1,
+      "urgency": "high",
+      "tokens_in": 122,
+      "tokens_out": 22,
+      "usd": 3.15e-05
+    },
+    {
+      "i": 94,
+      "message": "Minor scrape on the knee",
+      "cache": "BYPASS",
+      "ms": 897.1,
+      "urgency": "low",
+      "tokens_in": 122,
+      "tokens_out": 36,
+      "usd": 3.99e-05
+    },
+    {
+      "i": 95,
+      "message": "Bruise on the shin from a bump",
+      "cache": "BYPASS",
+      "ms": 1087.9,
+      "urgency": "low",
+      "tokens_in": 125,
+      "tokens_out": 29,
+      "usd": 3.615e-05
+    },
+    {
+      "i": 96,
+      "message": "Rash spreading on the forearm",
+      "cache": "BYPASS",
+      "ms": 857.0,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 31,
+      "usd": 3.705e-05
+    },
+    {
+      "i": 97,
+      "message": "Twisted ankle, mild swelling",
+      "cache": "BYPASS",
+      "ms": 1654.6,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 30,
+      "usd": 3.6450000000000005e-05
+    },
+    {
+      "i": 98,
+      "message": "Shortness of breath climbing stairs",
+      "cache": "BYPASS",
+      "ms": 878.5,
+      "urgency": "high",
+      "tokens_in": 123,
+      "tokens_out": 25,
+      "usd": 3.345e-05
+    },
+    {
+      "i": 99,
+      "message": "Sunburn on shoulders",
+      "cache": "BYPASS",
+      "ms": 892.6,
+      "urgency": "low",
+      "tokens_in": 121,
+      "tokens_out": 38,
+      "usd": 4.0950000000000006e-05
+    }
+  ]
+}

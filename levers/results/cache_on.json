@@ -1,0 +1,1023 @@
+{
+  "summary": {
+    "mode": "on",
+    "backend": "openai",
+    "fixture": "fixtures/traffic_100.json",
+    "n": 100,
+    "unique": 40,
+    "hits": 60,
+    "misses": 40,
+    "hit_rate": 0.6,
+    "model_calls": 40,
+    "tokens_in": 4914,
+    "tokens_out": 1216,
+    "usd_total": 0.001467,
+    "usd_per_1k_tokens_only": 0.0147,
+    "latency_ms_p50": 0.0,
+    "latency_ms_p95": 1177.6,
+    "latency_ms_mean": 418.1,
+    "date": "2026-10-11"
+  },
+  "calls": [
+    {
+      "i": 0,
+      "message": "Blurred vision since this morning",
+      "cache": "MISS",
+      "ms": 2443.2,
+      "urgency": "high",
+      "tokens_in": 123,
+      "tokens_out": 22,
+      "usd": 3.165e-05
+    },
+    {
+      "i": 1,
+      "message": "Chest pain radiating to left arm",
+      "cache": "MISS",
+      "ms": 856.8,
+      "urgency": "high",
+      "tokens_in": 124,
+      "tokens_out": 22,
+      "usd": 3.18e-05
+    },
+    {
+      "i": 2,
+      "message": "Mild seasonal allergy symptoms",
+      "cache": "MISS",
+      "ms": 862.4,
+      "urgency": "low",
+      "tokens_in": 121,
+      "tokens_out": 35,
+      "usd": 3.9149999999999996e-05
+    },
+    {
+      "i": 3,
+      "message": "Mild headache after missing lunch",
+      "cache": "MISS",
+      "ms": 1802.3,
+      "urgency": "low",
+      "tokens_in": 122,
+      "tokens_out": 33,
+      "usd": 3.8100000000000005e-05
+    },
+    {
+      "i": 4,
+      "message": "Ear pain and mild hearing loss",
+      "cache": "MISS",
+      "ms": 874.7,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 30,
+      "usd": 3.6450000000000005e-05
+    },
+    {
+      "i": 5,
+      "message": "Rash spreading on the forearm",
+      "cache": "MISS",
+      "ms": 984.5,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 31,
+      "usd": 3.705e-05
+    },
+    {
+      "i": 6,
+      "message": "Sunburn on shoulders",
+      "cache": "MISS",
+      "ms": 980.8,
+      "urgency": "low",
+      "tokens_in": 121,
+      "tokens_out": 37,
+      "usd": 4.034999999999999e-05
+    },
+    {
+      "i": 7,
+      "message": "High fever with stiff neck",
+      "cache": "MISS",
+      "ms": 984.1,
+      "urgency": "high",
+      "tokens_in": 122,
+      "tokens_out": 22,
+      "usd": 3.15e-05
+    },
+    {
+      "i": 8,
+      "message": "Child with diarrhoea since morning",
+      "cache": "MISS",
+      "ms": 968.7,
+      "urgency": "medium",
+      "tokens_in": 124,
+      "tokens_out": 38,
+      "usd": 4.14e-05
+    },
+    {
+      "i": 9,
+      "message": "Fever for two days, drinking fluids",
+      "cache": "MISS",
+      "ms": 1456.1,
+      "urgency": "medium",
+      "tokens_in": 124,
+      "tokens_out": 27,
+      "usd": 3.48e-05
+    },
+    {
+      "i": 10,
+      "message": "Mild anxiety before an exam",
+      "cache": "MISS",
+      "ms": 1132.9,
+      "urgency": "low",
+      "tokens_in": 122,
+      "tokens_out": 30,
+      "usd": 3.6299999999999995e-05
+    },
+    {
+      "i": 11,
+      "message": "Severe abdominal pain, rigid",
+      "cache": "MISS",
+      "ms": 854.9,
+      "urgency": "high",
+      "tokens_in": 122,
+      "tokens_out": 22,
+      "usd": 3.15e-05
+    },
+    {
+      "i": 12,
+      "message": "Severe abdominal pain, rigid",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "high",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 13,
+      "message": "Dizziness on standing up quickly",
+      "cache": "MISS",
+      "ms": 1092.4,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 31,
+      "usd": 3.705e-05
+    },
+    {
+      "i": 14,
+      "message": "Cut on hand, bleeding stopped",
+      "cache": "MISS",
+      "ms": 987.1,
+      "urgency": "high",
+      "tokens_in": 123,
+      "tokens_out": 43,
+      "usd": 4.425e-05
+    },
+    {
+      "i": 15,
+      "message": "Sprained wrist from a fall",
+      "cache": "MISS",
+      "ms": 958.5,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 30,
+      "usd": 3.6450000000000005e-05
+    },
+    {
+      "i": 16,
+      "message": "Hiccups lasting one hour",
+      "cache": "MISS",
+      "ms": 882.8,
+      "urgency": "low",
+      "tokens_in": 123,
+      "tokens_out": 35,
+      "usd": 3.9450000000000003e-05
+    },
+    {
+      "i": 17,
+      "message": "Mild headache after missing lunch",
+      "cache": "HIT",
+      "ms": 0.1,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 18,
+      "message": "Sprained wrist from a fall",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "medium",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 19,
+      "message": "Ear pain and mild hearing loss",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "medium",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 20,
+      "message": "Mild headache after missing lunch",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 21,
+      "message": "Heartburn after a heavy meal",
+      "cache": "MISS",
+      "ms": 958.8,
+      "urgency": "low",
+      "tokens_in": 123,
+      "tokens_out": 38,
+      "usd": 4.125e-05
+    },
+    {
+      "i": 22,
+      "message": "Mild seasonal allergy symptoms",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 23,
+      "message": "Hiccups lasting one hour",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 24,
+      "message": "High fever with stiff neck",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "high",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 25,
+      "message": "Sunburn on shoulders",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 26,
+      "message": "Swollen ankle, cannot bear weight",
+      "cache": "MISS",
+      "ms": 927.9,
+      "urgency": "high",
+      "tokens_in": 124,
+      "tokens_out": 27,
+      "usd": 3.48e-05
+    },
+    {
+      "i": 27,
+      "message": "Cut on hand, bleeding stopped",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "high",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 28,
+      "message": "Ear pain and mild hearing loss",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "medium",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 29,
+      "message": "Child with diarrhoea since morning",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "medium",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 30,
+      "message": "Child with diarrhoea since morning",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "medium",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 31,
+      "message": "Sprained wrist from a fall",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "medium",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 32,
+      "message": "Feeling tired, no other symptoms",
+      "cache": "MISS",
+      "ms": 834.0,
+      "urgency": "low",
+      "tokens_in": 123,
+      "tokens_out": 32,
+      "usd": 3.765e-05
+    },
+    {
+      "i": 33,
+      "message": "Chest tightness at rest",
+      "cache": "MISS",
+      "ms": 1105.6,
+      "urgency": "high",
+      "tokens_in": 122,
+      "tokens_out": 22,
+      "usd": 3.15e-05
+    },
+    {
+      "i": 34,
+      "message": "Mild anxiety before an exam",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 35,
+      "message": "Sore throat, no fever",
+      "cache": "MISS",
+      "ms": 1024.2,
+      "urgency": "low",
+      "tokens_in": 123,
+      "tokens_out": 42,
+      "usd": 4.365e-05
+    },
+    {
+      "i": 36,
+      "message": "Heartburn after a heavy meal",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 37,
+      "message": "Dizziness on standing up quickly",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "medium",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 38,
+      "message": "Mild headache after missing lunch",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 39,
+      "message": "Chest pain radiating to left arm",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "high",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 40,
+      "message": "Sore throat, no fever",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 41,
+      "message": "Runny nose and sneezing",
+      "cache": "MISS",
+      "ms": 1117.6,
+      "urgency": "low",
+      "tokens_in": 123,
+      "tokens_out": 34,
+      "usd": 3.8849999999999996e-05
+    },
+    {
+      "i": 42,
+      "message": "Sunburn on shoulders",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 43,
+      "message": "Rash spreading on the forearm",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "medium",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 44,
+      "message": "Common cold symptoms, no fever",
+      "cache": "MISS",
+      "ms": 914.8,
+      "urgency": "low",
+      "tokens_in": 123,
+      "tokens_out": 41,
+      "usd": 4.3049999999999996e-05
+    },
+    {
+      "i": 45,
+      "message": "Persistent cough for a week",
+      "cache": "MISS",
+      "ms": 835.8,
+      "urgency": "medium",
+      "tokens_in": 122,
+      "tokens_out": 25,
+      "usd": 3.3299999999999996e-05
+    },
+    {
+      "i": 46,
+      "message": "Difficulty breathing after a bee sting",
+      "cache": "MISS",
+      "ms": 825.7,
+      "urgency": "high",
+      "tokens_in": 123,
+      "tokens_out": 22,
+      "usd": 3.165e-05
+    },
+    {
+      "i": 47,
+      "message": "Sprained wrist from a fall",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "medium",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 48,
+      "message": "Coughing up blood",
+      "cache": "MISS",
+      "ms": 1014.2,
+      "urgency": "high",
+      "tokens_in": 122,
+      "tokens_out": 22,
+      "usd": 3.15e-05
+    },
+    {
+      "i": 49,
+      "message": "Nosebleed that stopped on its own",
+      "cache": "MISS",
+      "ms": 1287.2,
+      "urgency": "low",
+      "tokens_in": 125,
+      "tokens_out": 38,
+      "usd": 4.155e-05
+    },
+    {
+      "i": 50,
+      "message": "Persistent vomiting since last night",
+      "cache": "MISS",
+      "ms": 1008.1,
+      "urgency": "high",
+      "tokens_in": 122,
+      "tokens_out": 25,
+      "usd": 3.3299999999999996e-05
+    },
+    {
+      "i": 51,
+      "message": "Sore muscles after exercise",
+      "cache": "MISS",
+      "ms": 1005.3,
+      "urgency": "low",
+      "tokens_in": 122,
+      "tokens_out": 32,
+      "usd": 3.75e-05
+    },
+    {
+      "i": 52,
+      "message": "Chest tightness at rest",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "high",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 53,
+      "message": "Low-grade fever with body aches",
+      "cache": "MISS",
+      "ms": 889.6,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 25,
+      "usd": 3.345e-05
+    },
+    {
+      "i": 54,
+      "message": "Stomach pain after eating",
+      "cache": "MISS",
+      "ms": 1022.1,
+      "urgency": "medium",
+      "tokens_in": 122,
+      "tokens_out": 34,
+      "usd": 3.8700000000000006e-05
+    },
+    {
+      "i": 55,
+      "message": "Persistent vomiting since last night",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "high",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 56,
+      "message": "Mild headache after missing lunch",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 57,
+      "message": "Minor scrape on the knee",
+      "cache": "MISS",
+      "ms": 797.7,
+      "urgency": "low",
+      "tokens_in": 122,
+      "tokens_out": 35,
+      "usd": 3.93e-05
+    },
+    {
+      "i": 58,
+      "message": "Mild headache after missing lunch",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 59,
+      "message": "Chest pain radiating to left arm",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "high",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 60,
+      "message": "Chest tightness at rest",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "high",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 61,
+      "message": "Hiccups lasting one hour",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 62,
+      "message": "Insect bite with local swelling",
+      "cache": "MISS",
+      "ms": 977.1,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 36,
+      "usd": 4.005e-05
+    },
+    {
+      "i": 63,
+      "message": "Nosebleed that stopped on its own",
+      "cache": "HIT",
+      "ms": 0.1,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 64,
+      "message": "Low-grade fever with body aches",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "medium",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 65,
+      "message": "Shortness of breath climbing stairs",
+      "cache": "MISS",
+      "ms": 891.7,
+      "urgency": "high",
+      "tokens_in": 123,
+      "tokens_out": 25,
+      "usd": 3.345e-05
+    },
+    {
+      "i": 66,
+      "message": "Nosebleed that stopped on its own",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 67,
+      "message": "Mild anxiety before an exam",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 68,
+      "message": "Chest pain radiating to left arm",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "high",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 69,
+      "message": "Mild seasonal allergy symptoms",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 70,
+      "message": "High fever with stiff neck",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "high",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 71,
+      "message": "Mild burn on the forearm",
+      "cache": "MISS",
+      "ms": 1177.6,
+      "urgency": "low",
+      "tokens_in": 123,
+      "tokens_out": 38,
+      "usd": 4.125e-05
+    },
+    {
+      "i": 72,
+      "message": "Twisted ankle, mild swelling",
+      "cache": "MISS",
+      "ms": 851.8,
+      "urgency": "medium",
+      "tokens_in": 123,
+      "tokens_out": 30,
+      "usd": 3.6450000000000005e-05
+    },
+    {
+      "i": 73,
+      "message": "Nosebleed that stopped on its own",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 74,
+      "message": "Mild anxiety before an exam",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 75,
+      "message": "Mild burn on the forearm",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 76,
+      "message": "Hiccups lasting one hour",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 77,
+      "message": "Sudden weakness on one side",
+      "cache": "MISS",
+      "ms": 841.3,
+      "urgency": "high",
+      "tokens_in": 123,
+      "tokens_out": 22,
+      "usd": 3.165e-05
+    },
+    {
+      "i": 78,
+      "message": "Twisted ankle, mild swelling",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "medium",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 79,
+      "message": "Hiccups lasting one hour",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 80,
+      "message": "Back pain after lifting a jerry can",
+      "cache": "MISS",
+      "ms": 914.6,
+      "urgency": "medium",
+      "tokens_in": 125,
+      "tokens_out": 27,
+      "usd": 3.495e-05
+    },
+    {
+      "i": 81,
+      "message": "Stomach pain after eating",
+      "cache": "HIT",
+      "ms": 0.1,
+      "urgency": "medium",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 82,
+      "message": "Stomach pain after eating",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "medium",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 83,
+      "message": "Mild anxiety before an exam",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 84,
+      "message": "Back pain after lifting a jerry can",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "medium",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 85,
+      "message": "Mild headache after missing lunch",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 86,
+      "message": "Sore throat, no fever",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 87,
+      "message": "Mild anxiety before an exam",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 88,
+      "message": "Dizziness on standing up quickly",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "medium",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 89,
+      "message": "Sunburn on shoulders",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 90,
+      "message": "Toothache for three days",
+      "cache": "MISS",
+      "ms": 1022.5,
+      "urgency": "medium",
+      "tokens_in": 122,
+      "tokens_out": 27,
+      "usd": 3.45e-05
+    },
+    {
+      "i": 91,
+      "message": "Runny nose and sneezing",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 92,
+      "message": "Rash spreading on the forearm",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "medium",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 93,
+      "message": "Severe abdominal pain, rigid",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "high",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 94,
+      "message": "Minor scrape on the knee",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 95,
+      "message": "Bruise on the shin from a bump",
+      "cache": "MISS",
+      "ms": 1444.5,
+      "urgency": "low",
+      "tokens_in": 125,
+      "tokens_out": 29,
+      "usd": 3.615e-05
+    },
+    {
+      "i": 96,
+      "message": "Rash spreading on the forearm",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "medium",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 97,
+      "message": "Twisted ankle, mild swelling",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "medium",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 98,
+      "message": "Shortness of breath climbing stairs",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "high",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    },
+    {
+      "i": 99,
+      "message": "Sunburn on shoulders",
+      "cache": "HIT",
+      "ms": 0.0,
+      "urgency": "low",
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "usd": 0.0
+    }
+  ]
+}

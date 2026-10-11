@@ -1,0 +1,77 @@
+# docker-compose.cost.yml - the cost-aware AfyaPlus triage deploy (Week 7, Deliverable 2).
+#
+#   docker compose -f deploy/docker-compose.cost.yml config          # resolve, start nothing
+#   docker compose -f deploy/docker-compose.cost.yml up -d --build   # triage-api + redis
+#   docker compose -f deploy/docker-compose.cost.yml --profile two-replicas up -d
+#                                                                     # + a 2nd replica on :8002
+# Every container carries the same FinOps labels the Azure/AWS budgets filter on
+# (see deploy/ceiling_tags_checklist.md). Secrets come from .env (repo root) at start time.
+name: afyaplus-week7
+
+x-finops-labels: &finops
+  afyaplus.service: triage-api
+  afyaplus.version: "1.2.0"
+  afyaplus.env: staging
+  afyaplus.cost-center: clinical-ai
+  afyaplus.owner: danieloselu3
+
+x-triage: &triage
+  image: afyaplus-triage:1.2.0          # pinned tag, never latest: a cost claim needs an identifiable image
+  build:
+    context: ..
+    dockerfile: Dockerfile
+  env_file: [../.env]
+  environment:
+    APP_ENV: production                  # refuse to boot without JWT_SECRET
+    REDIS_URL: redis://redis:6379/0      # shared cache: a HIT on one replica is a HIT on all
+    CACHE_TTL_S: "600"
+    LLM_BASE_URL: ${LLM_BASE_URL:-}      # empty = api.openai.com; any OpenAI-compatible URL works
+    LLM_MODEL: ${LLM_MODEL:-gpt-4o-mini}
+    TRIAGE_RATE_LIMIT_PER_MIN: ${TRIAGE_RATE_LIMIT_PER_MIN:-30}
+    TRIAGE_BACKEND: ${TRIAGE_BACKEND:-openai}   # stub = free load tests
+    STUB_LATENCY_MS: ${STUB_LATENCY_MS:-0}
+    COST_CENTER: clinical-ai
+  depends_on:
+    redis:
+      condition: service_healthy
+  deploy:
+    resources:
+      limits:                            # the ceiling: what one replica may ever use
+        cpus: "0.5"
+        memory: 1G
+      reservations:                      # the floor the scheduler guarantees
+        memory: 256M
+  restart: unless-stopped
+  labels: *finops
+
+services:
+  triage-api:
+    <<: *triage
+    ports: ["8000:8000"]
+
+  # A second replica for the shared-cache drill only. Replica ceiling in the cloud is 3
+  # (deploy/hpa.yaml, deploy/serverless-ish.yaml); locally two prove the cache is shared.
+  triage-api-2:
+    <<: *triage
+    ports: ["8002:8000"]
+    profiles: [two-replicas]
+
+  redis:
+    image: redis:7.4-alpine
+    # A cache, not a database: no persistence, a hard memory cap, evict least-recently-used.
+    command: ["redis-server", "--save", "", "--appendonly", "no",
+              "--maxmemory", "64mb", "--maxmemory-policy", "allkeys-lru"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: 128M
+    restart: unless-stopped
+    labels:
+      <<: *finops
+      afyaplus.component: response-cache

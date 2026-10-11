@@ -1,0 +1,737 @@
+{
+  "summary": {
+    "ports": [
+      8000,
+      8002
+    ],
+    "cache_backend": [
+      "redis",
+      "redis"
+    ],
+    "n": 100,
+    "status_codes": {
+      "200": 100
+    },
+    "x_cache": {
+      "MISS": 40,
+      "HIT": 60
+    },
+    "by_port": {
+      "8000": {
+        "MISS": 19,
+        "HIT": 31
+      },
+      "8002": {
+        "MISS": 21,
+        "HIT": 29
+      }
+    },
+    "hit_rate": 0.6,
+    "latency_ms_p50": 10.1,
+    "latency_ms_p95": 1404.9,
+    "hit_ms_p95": 10.6,
+    "miss_ms_p50": 1005.3
+  },
+  "calls": [
+    {
+      "i": 0,
+      "port": "8000",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 1080.7
+    },
+    {
+      "i": 1,
+      "port": "8002",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 1944.9
+    },
+    {
+      "i": 2,
+      "port": "8000",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 1005.3
+    },
+    {
+      "i": 3,
+      "port": "8002",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 978.4
+    },
+    {
+      "i": 4,
+      "port": "8000",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 909.4
+    },
+    {
+      "i": 5,
+      "port": "8002",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 884.6
+    },
+    {
+      "i": 6,
+      "port": "8000",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 1046.2
+    },
+    {
+      "i": 7,
+      "port": "8002",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 872.8
+    },
+    {
+      "i": 8,
+      "port": "8000",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 918.2
+    },
+    {
+      "i": 9,
+      "port": "8002",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 924.3
+    },
+    {
+      "i": 10,
+      "port": "8000",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 885.4
+    },
+    {
+      "i": 11,
+      "port": "8002",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 855.2
+    },
+    {
+      "i": 12,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 10.4
+    },
+    {
+      "i": 13,
+      "port": "8002",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 990.4
+    },
+    {
+      "i": 14,
+      "port": "8000",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 1034.4
+    },
+    {
+      "i": 15,
+      "port": "8002",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 845.8
+    },
+    {
+      "i": 16,
+      "port": "8000",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 886.4
+    },
+    {
+      "i": 17,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 9.5
+    },
+    {
+      "i": 18,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 8.8
+    },
+    {
+      "i": 19,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 9.0
+    },
+    {
+      "i": 20,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 9.0
+    },
+    {
+      "i": 21,
+      "port": "8002",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 1013.0
+    },
+    {
+      "i": 22,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 7.0
+    },
+    {
+      "i": 23,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 5.0
+    },
+    {
+      "i": 24,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 4.6
+    },
+    {
+      "i": 25,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 4.4
+    },
+    {
+      "i": 26,
+      "port": "8000",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 899.7
+    },
+    {
+      "i": 27,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 10.4
+    },
+    {
+      "i": 28,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 8.1
+    },
+    {
+      "i": 29,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 8.4
+    },
+    {
+      "i": 30,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 7.8
+    },
+    {
+      "i": 31,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 7.2
+    },
+    {
+      "i": 32,
+      "port": "8000",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 925.0
+    },
+    {
+      "i": 33,
+      "port": "8002",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 869.7
+    },
+    {
+      "i": 34,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 8.6
+    },
+    {
+      "i": 35,
+      "port": "8002",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 1144.5
+    },
+    {
+      "i": 36,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 9.1
+    },
+    {
+      "i": 37,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 7.4
+    },
+    {
+      "i": 38,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 8.1
+    },
+    {
+      "i": 39,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 7.0
+    },
+    {
+      "i": 40,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 7.5
+    },
+    {
+      "i": 41,
+      "port": "8002",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 1166.9
+    },
+    {
+      "i": 42,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 8.9
+    },
+    {
+      "i": 43,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 8.6
+    },
+    {
+      "i": 44,
+      "port": "8000",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 1028.7
+    },
+    {
+      "i": 45,
+      "port": "8002",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 861.3
+    },
+    {
+      "i": 46,
+      "port": "8000",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 855.6
+    },
+    {
+      "i": 47,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 10.4
+    },
+    {
+      "i": 48,
+      "port": "8000",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 1451.1
+    },
+    {
+      "i": 49,
+      "port": "8002",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 1235.9
+    },
+    {
+      "i": 50,
+      "port": "8000",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 1323.2
+    },
+    {
+      "i": 51,
+      "port": "8002",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 1024.0
+    },
+    {
+      "i": 52,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 19.4
+    },
+    {
+      "i": 53,
+      "port": "8002",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 1076.7
+    },
+    {
+      "i": 54,
+      "port": "8000",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 1580.3
+    },
+    {
+      "i": 55,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 9.7
+    },
+    {
+      "i": 56,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 10.1
+    },
+    {
+      "i": 57,
+      "port": "8002",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 1282.4
+    },
+    {
+      "i": 58,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 10.8
+    },
+    {
+      "i": 59,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 8.1
+    },
+    {
+      "i": 60,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 8.5
+    },
+    {
+      "i": 61,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 7.9
+    },
+    {
+      "i": 62,
+      "port": "8000",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 1455.6
+    },
+    {
+      "i": 63,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 6.4
+    },
+    {
+      "i": 64,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 7.0
+    },
+    {
+      "i": 65,
+      "port": "8002",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 1404.9
+    },
+    {
+      "i": 66,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 9.4
+    },
+    {
+      "i": 67,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 10.1
+    },
+    {
+      "i": 68,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 10.2
+    },
+    {
+      "i": 69,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 9.2
+    },
+    {
+      "i": 70,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 8.6
+    },
+    {
+      "i": 71,
+      "port": "8002",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 1539.3
+    },
+    {
+      "i": 72,
+      "port": "8000",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 1356.4
+    },
+    {
+      "i": 73,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 7.8
+    },
+    {
+      "i": 74,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 7.3
+    },
+    {
+      "i": 75,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 7.2
+    },
+    {
+      "i": 76,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 7.2
+    },
+    {
+      "i": 77,
+      "port": "8002",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 908.4
+    },
+    {
+      "i": 78,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 10.1
+    },
+    {
+      "i": 79,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 8.0
+    },
+    {
+      "i": 80,
+      "port": "8000",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 904.1
+    },
+    {
+      "i": 81,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 9.4
+    },
+    {
+      "i": 82,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 9.8
+    },
+    {
+      "i": 83,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 11.1
+    },
+    {
+      "i": 84,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 9.8
+    },
+    {
+      "i": 85,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 8.9
+    },
+    {
+      "i": 86,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 9.8
+    },
+    {
+      "i": 87,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 8.4
+    },
+    {
+      "i": 88,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 7.3
+    },
+    {
+      "i": 89,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 6.6
+    },
+    {
+      "i": 90,
+      "port": "8000",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 902.0
+    },
+    {
+      "i": 91,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 10.6
+    },
+    {
+      "i": 92,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 9.2
+    },
+    {
+      "i": 93,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 7.6
+    },
+    {
+      "i": 94,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 7.6
+    },
+    {
+      "i": 95,
+      "port": "8002",
+      "status": 200,
+      "cache": "MISS",
+      "ms": 1196.9
+    },
+    {
+      "i": 96,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 9.2
+    },
+    {
+      "i": 97,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 8.2
+    },
+    {
+      "i": 98,
+      "port": "8000",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 8.2
+    },
+    {
+      "i": 99,
+      "port": "8002",
+      "status": 200,
+      "cache": "HIT",
+      "ms": 8.2
+    }
+  ]
+}

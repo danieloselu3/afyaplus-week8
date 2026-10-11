@@ -1,0 +1,49 @@
+{
+  "api_usd_per_request": 3.7125e-05,
+  "baseline_requests_month": 60000,
+  "people_oncall_monthly": 400.0,
+  "storage_obs_monthly": 50.0,
+  "selfhost_var_per_req": 5e-06,
+  "options": [
+    {
+      "option": "Azure NV36ads A10 v5, South Africa North [2]",
+      "gpu_usd_per_h": 4.672,
+      "fixed_usd_month": 3860.56,
+      "break_even_requests_month": 120173074,
+      "break_even_if_people_cost_zero": 107721712,
+      "break_even_two_gpus": 226338366,
+      "break_even_at_gpt4o_price": 6277461,
+      "multiple_of_baseline_volume": 2003
+    },
+    {
+      "option": "Azure NV36ads A10 v5, East US [2]",
+      "gpu_usd_per_h": 3.2,
+      "fixed_usd_month": 2786.0,
+      "break_even_requests_month": 86723735,
+      "break_even_if_people_cost_zero": 74272374,
+      "break_even_two_gpus": 159439689,
+      "break_even_at_gpt4o_price": 4530173,
+      "multiple_of_baseline_volume": 1445
+    },
+    {
+      "option": "Azure NC4as T4 v3, East US [2] (16 GB: 8B model only if 4-bit)",
+      "gpu_usd_per_h": 0.526,
+      "fixed_usd_month": 833.98,
+      "break_even_requests_month": 25960467,
+      "break_even_if_people_cost_zero": 13509105,
+      "break_even_two_gpus": 37913152,
+      "break_even_at_gpt4o_price": 1356093,
+      "multiple_of_baseline_volume": 433
+    },
+    {
+      "option": "vast.ai RTX 4090, Week 4 measured [4] (no SLA, not production)",
+      "gpu_usd_per_h": 0.78,
+      "fixed_usd_month": 1019.4,
+      "break_even_requests_month": 31732296,
+      "break_even_if_people_cost_zero": 19280934,
+      "break_even_two_gpus": 49456809,
+      "break_even_at_gpt4o_price": 1657595,
+      "multiple_of_baseline_volume": 529
+    }
+  ]
+}

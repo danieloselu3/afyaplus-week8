@@ -1,0 +1,7 @@
+# Everything CI and the tests need. The image itself installs requirements.txt only.
+-r requirements-agent.txt
+pytest==9.1.1
+httpx==0.28.1
+PyYAML==6.0.3
+reportlab==5.0.1
+ruff==0.14.0

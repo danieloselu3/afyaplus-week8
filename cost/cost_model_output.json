@@ -1,0 +1,147 @@
+{
+  "model": "gpt-4o-mini",
+  "token_shape": {
+    "prompt": 122.7,
+    "completion": 31.2,
+    "source": "measured: 100 live gpt-4o-mini calls on 2026-10-11"
+  },
+  "usd_per_model_call": 3.7125e-05,
+  "levers": {
+    "hit_rate_shared": 0.6,
+    "hit_rate_2_separate": 0.36,
+    "batch_saving": 0.316,
+    "batch_size": 4
+  },
+  "assumptions": {
+    "days_per_month": 30,
+    "baseline_per_day": 2000,
+    "spike_multiplier": 10,
+    "after_hours_share": 0.2,
+    "replica": "0.5 vCPU / 1.0 GiB, billed active all month",
+    "ops_hours_per_month": 6,
+    "ops_rate_usd_per_h": 25.0
+  },
+  "redis_break_even_requests_per_month": 2629966,
+  "scenarios": [
+    {
+      "scenario": "baseline: no levers",
+      "requests_per_day": 2000,
+      "requests_per_month": 60000,
+      "replicas": 1,
+      "cache_hit_rate": 0.0,
+      "redis": false,
+      "batch_saving_after_hours": 0.0,
+      "lines_usd": {
+        "model_tokens": 2.23,
+        "containers": 34.02,
+        "redis": 0.0,
+        "logs": 0.4,
+        "people": 150.0
+      },
+      "total_usd_month": 186.65,
+      "usd_per_request": 0.003110845,
+      "usd_per_1k_total": 3.1108,
+      "usd_per_1k_tokens_only": 0.0371
+    },
+    {
+      "scenario": "baseline: in-process cache",
+      "requests_per_day": 2000,
+      "requests_per_month": 60000,
+      "replicas": 1,
+      "cache_hit_rate": 0.6,
+      "redis": false,
+      "batch_saving_after_hours": 0.0,
+      "lines_usd": {
+        "model_tokens": 0.89,
+        "containers": 34.02,
+        "redis": 0.0,
+        "logs": 0.4,
+        "people": 150.0
+      },
+      "total_usd_month": 185.31,
+      "usd_per_request": 0.00308857,
+      "usd_per_1k_total": 3.0886,
+      "usd_per_1k_tokens_only": 0.0149
+    },
+    {
+      "scenario": "baseline: cache + batch (RECOMMENDED)",
+      "requests_per_day": 2000,
+      "requests_per_month": 60000,
+      "replicas": 1,
+      "cache_hit_rate": 0.6,
+      "redis": false,
+      "batch_saving_after_hours": 0.316,
+      "lines_usd": {
+        "model_tokens": 0.83,
+        "containers": 34.02,
+        "redis": 0.0,
+        "logs": 0.4,
+        "people": 150.0
+      },
+      "total_usd_month": 185.26,
+      "usd_per_request": 0.00308763148,
+      "usd_per_1k_total": 3.0876,
+      "usd_per_1k_tokens_only": 0.0139
+    },
+    {
+      "scenario": "10x spike: no levers",
+      "requests_per_day": 20000,
+      "requests_per_month": 600000,
+      "replicas": 2,
+      "cache_hit_rate": 0.0,
+      "redis": false,
+      "batch_saving_after_hours": 0.0,
+      "lines_usd": {
+        "model_tokens": 22.28,
+        "containers": 73.44,
+        "redis": 0.0,
+        "logs": 4.03,
+        "people": 150.0
+      },
+      "total_usd_month": 249.75,
+      "usd_per_request": 0.00041624500000000004,
+      "usd_per_1k_total": 0.4162,
+      "usd_per_1k_tokens_only": 0.0371
+    },
+    {
+      "scenario": "10x spike: cache per replica + batch (RECOMMENDED)",
+      "requests_per_day": 20000,
+      "requests_per_month": 600000,
+      "replicas": 2,
+      "cache_hit_rate": 0.36,
+      "redis": false,
+      "batch_saving_after_hours": 0.316,
+      "lines_usd": {
+        "model_tokens": 13.36,
+        "containers": 73.44,
+        "redis": 0.0,
+        "logs": 4.03,
+        "people": 150.0
+      },
+      "total_usd_month": 240.83,
+      "usd_per_request": 0.000401378368,
+      "usd_per_1k_total": 0.4014,
+      "usd_per_1k_tokens_only": 0.0223
+    },
+    {
+      "scenario": "10x spike: shared Redis cache + batch",
+      "requests_per_day": 20000,
+      "requests_per_month": 600000,
+      "replicas": 2,
+      "cache_hit_rate": 0.6,
+      "redis": true,
+      "batch_saving_after_hours": 0.316,
+      "lines_usd": {
+        "model_tokens": 8.35,
+        "containers": 73.44,
+        "redis": 23.43,
+        "logs": 4.03,
+        "people": 150.0
+      },
+      "total_usd_month": 259.25,
+      "usd_per_request": 0.00043208648,
+      "usd_per_1k_total": 0.4321,
+      "usd_per_1k_tokens_only": 0.0139
+    }
+  ]
+}

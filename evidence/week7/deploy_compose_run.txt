@@ -1,0 +1,41 @@
+$ docker compose -f deploy/docker-compose.cost.yml --profile two-replicas ps
+NAME                            IMAGE                   STATUS                    PORTS
+afyaplus-week7-redis-1          redis:7.4-alpine        Up 34 seconds (healthy)   6379/tcp
+afyaplus-week7-triage-api-1     afyaplus-triage:1.2.0   Up 23 seconds (healthy)   0.0.0.0:8000->8000/tcp, [::]:8000->8000/tcp
+afyaplus-week7-triage-api-2-1   afyaplus-triage:1.2.0   Up 23 seconds (healthy)   0.0.0.0:8002->8000/tcp, [::]:8002->8000/tcp
+
+$ curl -s localhost:8000/health ; curl -s localhost:8002/health
+{"service":"triage-api","version":"1.2.0","status":"ok","model_backend":"openai","model":"gpt-4o-mini","llm_endpoint":"api.openai.com","cache":"redis"}
+{"service":"triage-api","version":"1.2.0","status":"ok","model_backend":"openai","model":"gpt-4o-mini","llm_endpoint":"api.openai.com","cache":"redis"}
+
+$ docker inspect afyaplus-week7-triage-api-1 --format '{{json .Config.Labels}}'  (afyaplus.* only)
+{
+  "afyaplus.cost-center": "clinical-ai",
+  "afyaplus.env": "staging",
+  "afyaplus.owner": "danieloselu3",
+  "afyaplus.service": "triage-api",
+  "afyaplus.version": "1.2.0"
+}
+
+$ docker stats --no-stream (limits in force)
+NAME                            CPU %     MEM USAGE / LIMIT
+afyaplus-week7-triage-api-1     0.20%     42.68MiB / 1GiB
+afyaplus-week7-triage-api-2-1   0.25%     42.94MiB / 1GiB
+afyaplus-week7-redis-1          0.76%     6.016MiB / 128MiB
+
+$ TOKEN=$(curl -s -X POST localhost:8000/token -d '{"username":"mercy","password":"***"}' ...)
+$ curl -si -X POST localhost:8000/triage ... (replica 1, first time)
+HTTP/1.1 200 OK
+x-cache: MISS
+x-request-id: 9f4d99fa
+{"urgency":"medium","advice":"Please see a clinician within 24 hours to evaluate your fever.","model_used":"gpt-4o-mini","handled_for":"mercy","request_id":"9f4d99fa"}
+
+$ curl -si -X POST localhost:8002/triage ... (replica 2, same message)
+HTTP/1.1 200 OK
+x-cache: HIT
+x-request-id: 8a57c77d
+{"urgency":"medium","advice":"Please see a clinician within 24 hours to evaluate your fever.","model_used":"gpt-4o-mini","handled_for":"mercy","request_id":"8a57c77d"}
+
+$ docker compose logs triage-api triage-api-2 | grep cache=
+triage-api-1  | 2026-10-11 16:14:51,035 INFO triage_api trace=9f4d99fa model=gpt-4o-mini cache=MISS tokens_in=125 tokens_out=26
+triage-api-2-1  | 2026-10-11 16:14:51,112 INFO triage_api trace=8a57c77d model=gpt-4o-mini cache=HIT tokens_in=0 tokens_out=0

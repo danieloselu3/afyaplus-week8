@@ -1,0 +1,28 @@
+# hpa.yaml - Kubernetes equivalent of the ceiling (literacy; no cluster was run: declared).
+# Pairs with deployment.yaml from Week 6. Same numbers as serverless-ish.yaml.
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: triage-api
+  labels:
+    service: triage-api
+    cost-center: clinical-ai
+    owner: danieloselu3
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: triage-api
+  minReplicas: 1                   # always warm for clinicians
+  maxReplicas: 3                   # the spend ceiling: a retry storm queues, it does not multiply pods
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70   # the API waits on the model (I/O), so CPU rises late;
+                                   # on Container Apps use the concurrency rule instead
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300   # no flapping after a burst

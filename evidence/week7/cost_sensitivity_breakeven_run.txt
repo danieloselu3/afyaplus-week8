@@ -1,0 +1,65 @@
+$ python cost/sensitivity.py
+measured shape: prompt=122.7 completion=31.2
+
+1. $/1k, tokens only (rows = prompt tokens, columns = completion tokens)
+  prompt  c=15      c=31      c=80      c=180     c=360   
+      60    0.0180    0.0276    0.0570    0.1170    0.2250
+     123    0.0274    0.0370    0.0665    0.1265    0.2344
+     300    0.0540    0.0636    0.0930    0.1530    0.2610
+     450    0.0765    0.0861    0.1155    0.1755    0.2835
+     900    0.1440    0.1536    0.1830    0.2430    0.3510
+measured baseline $/1k=0.0371; double the prompt: +0.0184; double the completion: +0.0187
+course reference cell (450/180) = 0.1755  (Lab 1 prints 0.2018 incl. its 15% overhead)
+
+2. monthly total by cache hit rate (1 replica baseline, 2 replicas spike)
+ hit rate   baseline  10x spike
+     0.00     186.65     249.75
+     0.20     186.21     245.29
+     0.36     185.85     241.73
+     0.40     185.76     240.84
+     0.60     185.31     236.38
+
+3. monthly total by model price multiplier (no cache)
+  price x   baseline  10x spike  note
+        1     186.65     249.75  gpt-4o-mini today
+        2     188.88     272.02  price doubles
+     16.7     221.62     599.46  gpt-4o list price, 16.7x on both [1]
+       50     295.80    1341.22  stress test
+
+4. monthly total by people hours (no cache)
+    hours   baseline  10x spike
+        2      86.65     149.75
+        6     186.65     249.75
+       12     336.65     399.75
+       24     636.65     699.75
+
+Finding: at AfyaPlus volume the token line is the smallest line. People hours and the always-on container move the total far more than any token lever.
+
+$ python cost/retry_storm.py
+unit_usd_per_model_call=0.000037
+baseline: requests_month=60,000 tokens_month=2.23 storm=2.67 sane=2.25 amplification=1.200
+spike_10x: requests_month=600,000 tokens_month=22.28 storm=26.73 sane=22.50 amplification=1.200
+
+The amplification (1.200) is the same at any volume: a fifth of the token bill buys nothing.
+In dollars it is small here because tokens are small here; the real cost of a storm at
+AfyaPlus volume is the rate limit tripping for honest clinicians, and the on-call hour.
+Controls in place: per-coordinator rate limit with Retry-After (api/rate_limit.py),
+OpenAI client max_retries=1 (api/triage_model.py), and the budget alerts in deploy/.
+
+$ python cost/breakeven.py
+API side: gpt-4o-mini $0.000037/request (measured: 100 live gpt-4o-mini calls on 2026-10-11)
+AfyaPlus volume: 60,000/month baseline, 600,000 at the 10x spike
+
+self-host option                                                   fixed $/mo  break-even req/month x our volume
+Azure NV36ads A10 v5, South Africa North [2]                            3,861           120,173,074       2,003x
+Azure NV36ads A10 v5, East US [2]                                       2,786            86,723,735       1,445x
+Azure NC4as T4 v3, East US [2] (16 GB: 8B model only if 4-bit)            834            25,960,467         433x
+vast.ai RTX 4090, Week 4 measured [4] (no SLA, not production)          1,019            31,732,296         529x
+
+Even the cheapest option needs 25,960,467 requests a month (433x today). With on-call priced at $0 (dishonest) it would still need 13,509,105.
+
+What-ifs (requests/month):
+  Azure NV36ads A10 v5, South Africa North [2] two GPUs:  226,338,366   if we paid gpt-4o prices:  6,277,461 (105x today)
+  Azure NV36ads A10 v5, East US [2]            two GPUs:  159,439,689   if we paid gpt-4o prices:  4,530,173 (76x today)
+  Azure NC4as T4 v3, East US [2] (16 GB: 8B mo two GPUs:   37,913,152   if we paid gpt-4o prices:  1,356,093 (23x today)
+  vast.ai RTX 4090, Week 4 measured [4] (no SL two GPUs:   49,456,809   if we paid gpt-4o prices:  1,657,595 (28x today)

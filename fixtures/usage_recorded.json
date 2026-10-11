@@ -1,0 +1,8 @@
+{
+  "model": "gpt-4o-mini",
+  "n_calls": 100,
+  "date": "2026-10-11",
+  "avg_prompt_tokens": 122.7,
+  "avg_completion_tokens": 31.2,
+  "source": "levers/cache_hitrate.py --mode off (fixtures/traffic_100.json)"
+}

@@ -1,0 +1,96 @@
+{
+  "fixture": "fixtures/backlog_24.json",
+  "n_messages": 24,
+  "backend": "openai",
+  "single_call_self_agreement": 0.983,
+  "before": {
+    "model_calls": 24,
+    "tokens_in": 2946,
+    "tokens_out": 741,
+    "usd_per_1k_messages": 0.0369,
+    "source": "levers/results/cache_off.json (live one-call answers)"
+  },
+  "after": [
+    {
+      "batch_size": 4,
+      "model_calls": 6,
+      "tokens_in": 1386,
+      "tokens_out": 664,
+      "wall_seconds": 12.3,
+      "status": {
+        "done": 24
+      },
+      "usd_per_1k_messages": 0.0253,
+      "usd_per_1k_with_batch_api": 0.0126,
+      "token_saving_vs_before": 0.444,
+      "usd_saving_vs_before": 0.316,
+      "agreement_with_one_call": 0.958,
+      "mismatches": [
+        {
+          "message": "Insect bite with local swelling",
+          "one_call": "medium",
+          "batched": "low"
+        }
+      ]
+    },
+    {
+      "batch_size": 8,
+      "model_calls": 3,
+      "tokens_in": 897,
+      "tokens_out": 621,
+      "wall_seconds": 6.9,
+      "status": {
+        "done": 24
+      },
+      "usd_per_1k_messages": 0.0211,
+      "usd_per_1k_with_batch_api": 0.0106,
+      "token_saving_vs_before": 0.588,
+      "usd_saving_vs_before": 0.428,
+      "agreement_with_one_call": 0.917,
+      "mismatches": [
+        {
+          "message": "Insect bite with local swelling",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Twisted ankle, mild swelling",
+          "one_call": "medium",
+          "batched": "low"
+        }
+      ]
+    },
+    {
+      "batch_size": 12,
+      "model_calls": 2,
+      "tokens_in": 734,
+      "tokens_out": 602,
+      "wall_seconds": 6.1,
+      "status": {
+        "done": 24
+      },
+      "usd_per_1k_messages": 0.0196,
+      "usd_per_1k_with_batch_api": 0.0098,
+      "token_saving_vs_before": 0.638,
+      "usd_saving_vs_before": 0.468,
+      "agreement_with_one_call": 0.875,
+      "mismatches": [
+        {
+          "message": "Insect bite with local swelling",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Child with diarrhoea since morning",
+          "one_call": "medium",
+          "batched": "high"
+        },
+        {
+          "message": "Twisted ankle, mild swelling",
+          "one_call": "medium",
+          "batched": "low"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "separate_cache_hit_rate_by_replicas": {
+    "1": 0.6,
+    "2": 0.36,
+    "3": 0.3
+  },
+  "shared_redis_measured": "levers/results/http_replay_2replica.json"
+}

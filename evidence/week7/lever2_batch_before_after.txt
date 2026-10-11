@@ -1,0 +1,15 @@
+$ python levers/batch_worker.py   # idempotency demo (stub, free)
+2026-10-11 19:19:13,844 INFO response_cache cache: backend=memory ttl_s=600
+processed 3
+processed 0
+{'done': 3}
+
+$ python levers/batch_measure.py
+2026-10-11 19:19:14,233 INFO response_cache cache: backend=memory ttl_s=600
+before: 24 calls, tokens_in=2946 tokens_out=741, usd_per_1k_messages=0.0369
+one-call path agrees with itself on repeats: 0.98
+batch= 4: 6 calls, tokens_in=1386 tokens_out=664, usd_per_1k_messages=0.0253 (saving 0.316), agreement=0.96, status={'done': 24}
+batch= 8: 3 calls, tokens_in=897 tokens_out=621, usd_per_1k_messages=0.0211 (saving 0.428), agreement=0.92, status={'done': 24}
+batch=12: 2 calls, tokens_in=734 tokens_out=602, usd_per_1k_messages=0.0196 (saving 0.468), agreement=0.88, status={'done': 24}
+wrote levers\results\batch.json
+exit=0

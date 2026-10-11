@@ -1,0 +1,68 @@
+{
+  "setup": {
+    "replicas": 1,
+    "cpu_limit": "0.5 vCPU",
+    "memory_limit": "1 GiB",
+    "backend": "stub with STUB_LATENCY_MS (simulated model time)",
+    "cache": "none hit (every message unique)",
+    "health": {
+      "service": "triage-api",
+      "version": "1.2.0",
+      "status": "ok",
+      "model_backend": "stub",
+      "model": "gpt-4o-mini",
+      "llm_endpoint": "api.openai.com",
+      "cache": "redis"
+    }
+  },
+  "levels": [
+    {
+      "concurrency": 1,
+      "requests": 120,
+      "ok": 120,
+      "req_per_s": 0.99,
+      "p50_ms": 1012,
+      "p95_ms": 1027
+    },
+    {
+      "concurrency": 5,
+      "requests": 120,
+      "ok": 120,
+      "req_per_s": 4.89,
+      "p50_ms": 1020,
+      "p95_ms": 1030
+    },
+    {
+      "concurrency": 10,
+      "requests": 120,
+      "ok": 120,
+      "req_per_s": 9.46,
+      "p50_ms": 1023,
+      "p95_ms": 1188
+    },
+    {
+      "concurrency": 20,
+      "requests": 120,
+      "ok": 120,
+      "req_per_s": 17.47,
+      "p50_ms": 1100,
+      "p95_ms": 1213
+    },
+    {
+      "concurrency": 40,
+      "requests": 120,
+      "ok": 120,
+      "req_per_s": 30.94,
+      "p50_ms": 1234,
+      "p95_ms": 1315
+    },
+    {
+      "concurrency": 60,
+      "requests": 120,
+      "ok": 120,
+      "req_per_s": 32.34,
+      "p50_ms": 1395,
+      "p95_ms": 2365
+    }
+  ]
+}

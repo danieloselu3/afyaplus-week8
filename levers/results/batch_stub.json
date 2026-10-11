@@ -1,0 +1,261 @@
+{
+  "fixture": "fixtures/backlog_24.json",
+  "n_messages": 24,
+  "backend": "stub",
+  "single_call_self_agreement": 0.983,
+  "before": {
+    "model_calls": 24,
+    "tokens_in": 2946,
+    "tokens_out": 741,
+    "usd_per_1k_messages": 0.0369,
+    "source": "levers/results/cache_off.json (live one-call answers)"
+  },
+  "after": [
+    {
+      "batch_size": 4,
+      "model_calls": 6,
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "wall_seconds": 0.0,
+      "status": {
+        "done": 24
+      },
+      "usd_per_1k_messages": 0.0,
+      "usd_per_1k_with_batch_api": 0.0,
+      "token_saving_vs_before": 1.0,
+      "usd_saving_vs_before": 1.0,
+      "agreement_with_one_call": 0.458,
+      "mismatches": [
+        {
+          "message": "High fever with stiff neck",
+          "one_call": "high",
+          "batched": "low"
+        },
+        {
+          "message": "Shortness of breath climbing stairs",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Chest tightness at rest",
+          "one_call": "high",
+          "batched": "low"
+        },
+        {
+          "message": "Insect bite with local swelling",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Back pain after lifting a jerry can",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Persistent cough for a week",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Rash spreading on the forearm",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Child with diarrhoea since morning",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Severe abdominal pain, rigid",
+          "one_call": "high",
+          "batched": "low"
+        },
+        {
+          "message": "Ear pain and mild hearing loss",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Twisted ankle, mild swelling",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Toothache for three days",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Coughing up blood",
+          "one_call": "high",
+          "batched": "low"
+        }
+      ]
+    },
+    {
+      "batch_size": 8,
+      "model_calls": 3,
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "wall_seconds": 0.0,
+      "status": {
+        "done": 24
+      },
+      "usd_per_1k_messages": 0.0,
+      "usd_per_1k_with_batch_api": 0.0,
+      "token_saving_vs_before": 1.0,
+      "usd_saving_vs_before": 1.0,
+      "agreement_with_one_call": 0.458,
+      "mismatches": [
+        {
+          "message": "High fever with stiff neck",
+          "one_call": "high",
+          "batched": "low"
+        },
+        {
+          "message": "Shortness of breath climbing stairs",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Chest tightness at rest",
+          "one_call": "high",
+          "batched": "low"
+        },
+        {
+          "message": "Insect bite with local swelling",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Back pain after lifting a jerry can",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Persistent cough for a week",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Rash spreading on the forearm",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Child with diarrhoea since morning",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Severe abdominal pain, rigid",
+          "one_call": "high",
+          "batched": "low"
+        },
+        {
+          "message": "Ear pain and mild hearing loss",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Twisted ankle, mild swelling",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Toothache for three days",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Coughing up blood",
+          "one_call": "high",
+          "batched": "low"
+        }
+      ]
+    },
+    {
+      "batch_size": 12,
+      "model_calls": 2,
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "wall_seconds": 0.0,
+      "status": {
+        "done": 24
+      },
+      "usd_per_1k_messages": 0.0,
+      "usd_per_1k_with_batch_api": 0.0,
+      "token_saving_vs_before": 1.0,
+      "usd_saving_vs_before": 1.0,
+      "agreement_with_one_call": 0.458,
+      "mismatches": [
+        {
+          "message": "High fever with stiff neck",
+          "one_call": "high",
+          "batched": "low"
+        },
+        {
+          "message": "Shortness of breath climbing stairs",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Chest tightness at rest",
+          "one_call": "high",
+          "batched": "low"
+        },
+        {
+          "message": "Insect bite with local swelling",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Back pain after lifting a jerry can",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Persistent cough for a week",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Rash spreading on the forearm",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Child with diarrhoea since morning",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Severe abdominal pain, rigid",
+          "one_call": "high",
+          "batched": "low"
+        },
+        {
+          "message": "Ear pain and mild hearing loss",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Twisted ankle, mild swelling",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Toothache for three days",
+          "one_call": "medium",
+          "batched": "low"
+        },
+        {
+          "message": "Coughing up blood",
+          "one_call": "high",
+          "batched": "low"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+# serverless-ish.yaml - the same image on a scale-to-zero-capable platform
+# (Azure Container Apps shape; Cloud Run / App Runner are the same three decisions).
+# Config literacy, NOT applied to a live subscription (declared in the README).
+interactive:                       # POST /triage: a clinician is waiting
+  image: afyaplus-triage:1.2.0
+  cpu: 0.5                         # = the compose ceiling, = the cost model's replica
+  memory: 1Gi
+  min_instances: 1                 # never cold: no clinician waits for a container to boot
+  max_instances: 3                 # the spend ceiling; one replica carried ~31 req/s in
+                                   # levers/results/load_test.json, a spike day peaks under 1 req/s
+  scale_rule:
+    http_concurrent_requests: 20   # add a replica above 20 in-flight requests (p95 stayed
+                                   # ~1.2 s up to 20-40 concurrent in the load test)
+  env:
+    LLM_BASE_URL: ${LLM_BASE_URL}
+    LLM_MODEL: ${LLM_MODEL}
+    CACHE_ENABLED: "true"
+    REDIS_URL: ""                  # in-process cache until ~2.6M requests/month (cost/cost_model.md)
+  tags: {service: triage-api, version: 1.2.0, env: production, cost-center: clinical-ai, owner: danieloselu3}
+
+batch:                             # levers/batch_worker.py: nobody is waiting
+  image: afyaplus-triage:1.2.0
+  min_instances: 0                 # scale to zero: pay only while the 06:00 job runs
+  max_instances: 1
+  schedule: "0 6 * * *"            # drain the after-hours queue before clinics open at 08:00
+  tags: {service: triage-api, component: batch-worker, env: production, cost-center: clinical-ai, owner: danieloselu3}

@@ -1,0 +1,42 @@
+$ docker compose exec redis redis-cli FLUSHDB
+OK
+
+$ python levers/http_replay.py --ports 8000,8002
+{
+  "ports": [
+    8000,
+    8002
+  ],
+  "cache_backend": [
+    "redis",
+    "redis"
+  ],
+  "n": 100,
+  "status_codes": {
+    "200": 100
+  },
+  "x_cache": {
+    "MISS": 40,
+    "HIT": 60
+  },
+  "by_port": {
+    "8000": {
+      "MISS": 19,
+      "HIT": 31
+    },
+    "8002": {
+      "MISS": 21,
+      "HIT": 29
+    }
+  },
+  "hit_rate": 0.6,
+  "latency_ms_p50": 10.1,
+  "latency_ms_p95": 1404.9,
+  "hit_ms_p95": 10.6,
+  "miss_ms_p50": 1005.3
+}
+wrote levers\results\http_replay_2replica.json
+exit=0
+
+$ docker compose exec redis redis-cli DBSIZE  (distinct cached answers)
+40

@@ -1,0 +1,14 @@
+$ TRIAGE_BACKEND=stub STUB_LATENCY_MS=1000 TRIAGE_RATE_LIMIT_PER_MIN=100000 docker compose -f deploy/docker-compose.cost.yml up -d triage-api
+$ python levers/load_test.py
+concurrency requests   ok  req/s  p50 ms  p95 ms
+          1      120  120   0.99    1012    1027
+          5      120  120   4.89    1020    1030
+         10      120  120   9.46    1023    1188
+         20      120  120  17.47    1100    1213
+         40      120  120  30.94    1234    1315
+         60      120  120  32.34    1395    2365
+wrote levers/results/load_test.json
+
+$ docker stats --no-stream afyaplus-week7-triage-api-1
+NAME                          CPU %     MEM USAGE / LIMIT
+afyaplus-week7-triage-api-1   0.28%     50.88MiB / 1GiB

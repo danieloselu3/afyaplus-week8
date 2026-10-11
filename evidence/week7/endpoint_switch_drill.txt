@@ -1,0 +1,18 @@
+## Run A: default (api.openai.com)
+$ docker compose -f deploy/docker-compose.cost.yml config | grep -E "LLM_(BASE_URL|MODEL)"
+      LLM_BASE_URL: ""
+      LLM_MODEL: gpt-4o-mini
+
+## Run B: Nebius-shaped endpoint, same image, no rebuild
+$ LLM_BASE_URL=https://api.studio.nebius.ai/v1 LLM_MODEL=meta-llama/Meta-Llama-3.1-8B-Instruct docker compose -f deploy/docker-compose.cost.yml config | grep -E "LLM_(BASE_URL|MODEL)"
+      LLM_BASE_URL: https://api.studio.nebius.ai/v1
+      LLM_MODEL: meta-llama/Meta-Llama-3.1-8B-Instruct
+$ LLM_BASE_URL=... LLM_MODEL=... docker compose -f deploy/docker-compose.cost.yml up -d triage-api && curl -s localhost:8000/health
+{"service":"triage-api","version":"1.2.0","status":"ok","model_backend":"openai","model":"meta-llama/Meta-Llama-3.1-8B-Instruct","llm_endpoint":"api.studio.nebius.ai","cache":"redis"}
+$ docker compose -f deploy/docker-compose.cost.yml images triage-api   (same image id both runs)
+afyaplus-week7-triage-api-1   afyaplus-triage     1.2.0               linux/amd64         286c151544d7        60.3MB              9 minutes ago
+
+## Back to Run A
+$ docker compose -f deploy/docker-compose.cost.yml up -d triage-api && curl -s localhost:8000/health
+{"service":"triage-api","version":"1.2.0","status":"ok","model_backend":"openai","model":"gpt-4o-mini","llm_endpoint":"api.openai.com","cache":"redis"}
+afyaplus-week7-triage-api-1   afyaplus-triage     1.2.0               linux/amd64         286c151544d7        60.3MB              10 minutes ago

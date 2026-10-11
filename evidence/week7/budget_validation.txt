@@ -1,0 +1,13 @@
+$ python deploy/validate_budgets.py
+cap=$80/month on tag service=triage-api (azure + aws agree)
+cloud spend from cost model: baseline $34.42, planned 10x spike $77.47
+80% actual alert at $64.00: silent in an ordinary month, fires late in a spike month
+100% forecast alert: fires early in any month heading past $80
+budgets OK
+exit=0
+
+$ python -c "import json; d=json.load(open(\"deploy/azure_budget_triage.json\")); print(d[\"amount\"], d[\"filter\"], [n[\"threshold\"] for n in d[\"notifications\"].values()])"
+80 {'tags': {'name': 'service', 'operator': 'In', 'values': ['triage-api']}} [80, 100]
+
+$ python -c "import json; d=json.load(open(\"deploy/aws_budget.json\")); print(d[\"BudgetLimit\"], d[\"CostFilters\"])"
+{'Amount': '80', 'Unit': 'USD'} {'TagKeyValue': ['user:service$triage-api']}

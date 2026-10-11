@@ -1,0 +1,9 @@
+unit_usd_per_model_call=0.000037
+baseline: requests_month=60,000 tokens_month=2.23 storm=2.67 sane=2.25 amplification=1.200
+spike_10x: requests_month=600,000 tokens_month=22.28 storm=26.73 sane=22.50 amplification=1.200
+
+The amplification (1.200) is the same at any volume: a fifth of the token bill buys nothing.
+In dollars it is small here because tokens are small here; the real cost of a storm at
+AfyaPlus volume is the rate limit tripping for honest clinicians, and the on-call hour.
+Controls in place: per-coordinator rate limit with Retry-After (rate_limit.py),
+OpenAI client max_retries=1 (triage_model.py), and the budget alerts in deploy/.

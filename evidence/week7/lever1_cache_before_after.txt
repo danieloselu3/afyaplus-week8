@@ -1,0 +1,15 @@
+$ python levers/cache_hitrate.py --mode off
+2026-10-11 19:07:33,196 INFO response_cache cache: backend=memory ttl_s=600
+mode=off backend=openai n=100 hits=0 misses=100 hit_rate=0.00
+model_calls=100 tokens_in=12274 tokens_out=3116 usd_total=0.003711 usd_per_1k_tokens_only=0.0371
+latency_ms p50=974.7 p95=1476.1 mean=1043.3
+wrote levers\results\cache_off.json
+exit=0
+
+$ python levers/cache_hitrate.py --mode on
+2026-10-11 19:09:14,900 INFO response_cache cache: backend=memory ttl_s=600
+mode=on backend=openai n=100 hits=60 misses=40 hit_rate=0.60
+model_calls=40 tokens_in=4914 tokens_out=1216 usd_total=0.001467 usd_per_1k_tokens_only=0.0147
+latency_ms p50=0.0 p95=1177.6 mean=418.1
+wrote levers\results\cache_on.json
+exit=0

@@ -1,0 +1,16 @@
+model=gpt-4o-mini  prices_per_1M prompt=0.15 completion=0.6
+tokens/request prompt=122.7 completion=31.2  (measured: 100 live gpt-4o-mini calls on 2026-10-11)
+usd_per_model_call=0.000037
+levers (measured on fixtures): hit_rate shared=0.60 2 separate caches=0.36  batch(size 4) saving=0.316 on the 20% after-hours share
+
+scenario                                              req/month   tokens  contnrs   redis   logs  people    TOTAL  $/1k all  $/1k tok
+-------------------------------------------------------------------------------------------------------------------------------------
+baseline: no levers                                      60,000     2.23    34.02    0.00   0.40  150.00   186.65    3.1108    0.0371
+baseline: in-process cache                               60,000     0.89    34.02    0.00   0.40  150.00   185.31    3.0886    0.0149
+baseline: cache + batch (RECOMMENDED)                    60,000     0.83    34.02    0.00   0.40  150.00   185.26    3.0876    0.0139
+10x spike: no levers                                    600,000    22.28    73.44    0.00   4.03  150.00   249.75    0.4162    0.0371
+10x spike: cache per replica + batch (RECOMMENDED)      600,000    13.36    73.44    0.00   4.03  150.00   240.83    0.4014    0.0223
+10x spike: shared Redis cache + batch                   600,000     8.35    73.44   23.43   4.03  150.00   259.25    0.4321    0.0139
+
+Redis pays for itself (vs a cache per replica, 2 replicas) above 2,629,966 requests/month (~87,665/day)
+wrote cost\cost_model_output.json
