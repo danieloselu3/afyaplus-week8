@@ -22,7 +22,16 @@ All notable changes are recorded here. Format: [Keep a Changelog](https://keepac
   - Plan: in a 1.x minor, accept both names and log a deprecation warning for `item`. Remove `item` in 2.0.0, and no earlier than 30 days after partners are told.
   - CI blocks the rename until then: `scripts/check_mcp_health.py` requires `check_stock` with its current shape.
 
-## [1.3.0] - 2026-10-11
+## [1.3.1] - 2026-10-11
+### Fixed
+- **Pipeline:** the `deploy-production` job installed only PyYAML. `scripts/check_release.py` imports the MCP server, which needs the `mcp` package, so the production promotion of `v1.3.0` failed at its first step. Build, the four gates and staging had all passed. The job now installs `requirements-dev.txt`.
+  - Production never ran 1.3.0. The `v1.3.0` tag stays where it is, because release tags are immutable (a ruleset blocks moving or deleting them). The fix ships as this patch release.
+- `scripts/bump_release.py` moves the lockstep release in every place `check_release.py` checks.
+
+### Unchanged
+- Service code, prompt 1.2.0 and its pin, the model and config values, and the MCP tools. Only the release number moved, because the platform is versioned in lockstep.
+
+## [1.3.0] - 2026-10-11 (tagged, promoted to staging, production promotion failed: see 1.3.1)
 ### Added
 - **Versioned prompts:**
   - The triage system prompt moved out of code into `prompts/triage_system_v1.2.0.txt`, byte-identical to the Week 6/7 string.

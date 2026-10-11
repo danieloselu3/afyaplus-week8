@@ -1,0 +1,21 @@
+$ git commit --allow-empty -m "direct push attempt" && git push origin main
+remote: error: GH006: Protected branch update failed for refs/heads/main.        
+remote: 
+remote: - Changes must be made through a pull request.        
+remote: 
+remote: - 4 of 4 required status checks are expected.        
+ ! [remote rejected] main -> main (protected branch hook declined)
+error: failed to push some refs to 'https://github.com/danieloselu3/afyaplus-week8.git'
+exit=1
+
+$ git push --delete origin v1.3.0
+remote: error: GH013: Repository rule violations found for refs/tags/v1.3.0.        
+remote: Review all repository rules at https://github.com/danieloselu3/afyaplus-week8/rules?ref=refs%2Ftags%2Fv1.3.0        
+remote: 
+remote: - Cannot delete this tag        
+remote: 
+ ! [remote rejected] v1.3.0 (push declined due to repository rule violations)
+error: failed to push some refs to 'https://github.com/danieloselu3/afyaplus-week8.git'
+
+$ git ls-remote --tags origin v1.3.0   (still there)
+2a645356b0d24278b4352cf74e8dd11e386e6f62	refs/tags/v1.3.0
