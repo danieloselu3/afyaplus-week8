@@ -1,0 +1,99 @@
+# azure-pipelines.yml - the Azure DevOps twin of .github/workflows/ci.yml.
+# Config as code: NOT run against a live Azure DevOps project (declared in the README).
+# Same gates, same order, same scripts, same exit-code contract. The mapping:
+#   Actions `needs:`  -> Azure `dependsOn:` + `condition: succeeded()`
+#   Actions `run:`    -> Azure `script:`
+#   Actions environment: production (+ reviewers) -> Azure `deployment` job + environment approvals
+trigger:
+  branches: {include: [main]}
+  tags: {include: ["v*"]}
+pr:
+  branches: {include: [main]}
+
+variables:
+  PYTHON_VERSION: "3.12"
+  TRIAGE_BACKEND: stub
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+  - stage: CI
+    jobs:
+      - job: lint_test
+        steps:
+          - task: UsePythonVersion@0
+            inputs: {versionSpec: $(PYTHON_VERSION)}
+          - script: pip install -r requirements-dev.txt
+          - script: ruff check .
+            displayName: Lint
+          - script: python -m pytest -q
+            displayName: Unit tests
+          - script: python check_prompt_pin.py
+            displayName: Prompt pins
+          - script: python scripts/check_release.py
+            displayName: Release alignment
+
+      - job: eval
+        dependsOn: lint_test
+        condition: succeeded()
+        steps:
+          - task: UsePythonVersion@0
+            inputs: {versionSpec: $(PYTHON_VERSION)}
+          - script: pip install -r requirements-dev.txt
+          - script: python eval_prompts.py --threshold 0.85
+            displayName: Eval gate (never continueOnError on this step)
+          - publish: evals/report.json
+            artifact: eval-report
+            condition: always()
+
+      - job: mcp_health
+        dependsOn: eval
+        condition: succeeded()
+        steps:
+          - task: UsePythonVersion@0
+            inputs: {versionSpec: $(PYTHON_VERSION)}
+          - script: pip install -r requirements-dev.txt
+          - script: python scripts/check_mcp_health.py
+            displayName: MCP health gate (stdio handshake)
+
+      - job: build
+        dependsOn: mcp_health
+        condition: succeeded()
+        steps:
+          - script: |
+              V=$(grep -E '^release:' config/triage.yaml | cut -d'"' -f2)
+              docker build --build-arg IMAGE_TAG=$V --build-arg GIT_SHA=$(Build.SourceVersion) \
+                -t afyaplus-triage:$V .
+            displayName: Build image (release tag, never latest)
+          # Push to Azure Container Registry with a service connection, e.g.
+          # - task: Docker@2  inputs: {command: push, containerRegistry: acr-afyaplus, repository: afyaplus-triage}
+
+  - stage: Deploy_Staging
+    dependsOn: CI
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+    jobs:
+      - deployment: staging
+        environment: afyaplus-staging
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                - script: |
+                    echo "Promote the image built in CI (by digest) to staging, never rebuild"
+                    echo "stub: the same smoke as Actions -> bash scripts/smoke_deploy.sh"
+
+  - stage: Deploy_Production
+    dependsOn: Deploy_Staging
+    condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v'))
+    jobs:
+      - deployment: production
+        environment: afyaplus-production     # approvals: clinical_ops + ml-eng, set on the environment
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                - script: python scripts/check_release.py --tag $(Build.SourceBranchName)
+                - script: echo "Promote the SAME digest staging ran (stub: no cloud target)"

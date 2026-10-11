@@ -9,3 +9,4 @@ logs/
 # runtime state from the batch worker
 *.sqlite
 evals/report.json
+health.json

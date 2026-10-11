@@ -1,0 +1,39 @@
+# retrain-stub.yml - manual only. No GPU, so no weights are trained: the job bumps
+# model_version, adds a CHANGELOG line, runs the gates on the result and uploads the
+# patch. A human opens the PR from it, so the change goes through branch protection.
+name: retrain-stub
+
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: Why this retrain is being run
+        default: scheduled retrain (stub)
+
+permissions:
+  contents: read
+
+jobs:
+  retrain-stub:
+    runs-on: ubuntu-latest
+    env:
+      TRIAGE_BACKEND: stub
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12", cache: pip}
+      - run: pip install -r requirements-dev.txt
+      - name: Stub retrain (bumps model_version only)
+        run: python scripts/retrain_stub.py --reason "${{ inputs.reason }}"
+      - name: The bumped config still passes the gates
+        run: |
+          python check_prompt_pin.py
+          python scripts/check_release.py
+          python eval_prompts.py
+      - name: Patch for the pull request
+        run: |
+          git diff > retrain-stub.patch
+          cat retrain-stub.patch
+          { echo '### Retrain stub: no weights trained'; echo '```diff'; cat retrain-stub.patch; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with: {name: retrain-stub-patch, path: retrain-stub.patch}
