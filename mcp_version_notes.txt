@@ -1,0 +1,8 @@
+Additive is minor because every agent that worked against MCP 1.0.0 still works against
+1.3.0 without changing a line: list_low_stock and version://current are things it can
+ignore, and tests/test_versioned_mcp.py proves the existing tool schemas are byte-identical.
+Renaming a required argument (check_stock item -> item_code, drafted under [Unreleased]
+in CHANGELOG.md) is major because it breaks the contract those agents already bound to,
+and the cost of the change lands on somebody else's release schedule rather than ours.
+The MCP number jumped 1.0.0 -> 1.3.0 because the platform is versioned in lockstep; there
+was no MCP 1.1.0 or 1.2.0, and semver does not require consecutive numbers.

@@ -14,3 +14,12 @@ tests/
 evidence/
 docs/
 scripts/
+# Week 7/8 folders that are not part of either image
+cost/
+levers/
+deploy/
+memo/
+exec/
+fixtures/
+evals/
+.github/

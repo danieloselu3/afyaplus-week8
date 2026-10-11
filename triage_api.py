@@ -6,6 +6,7 @@ from fastapi import BackgroundTasks, Depends, FastAPI, HTTPException, Request, R
 from pydantic import BaseModel, ConfigDict, Field
 
 from auth import auth_router, require_role
+import prompt_app
 import response_cache
 from config import (CACHE_ENABLED, LLM_BASE_URL, OPENAI_MODEL, TRIAGE_BACKEND,
                     TRIAGE_RATE_LIMIT_PER_MIN, VERSION, get_logger)
@@ -36,6 +37,7 @@ class TriageResponse(BaseModel):
     urgency: Literal["low", "medium", "high"]
     advice: str
     model_used: str
+    prompt_version: str      # which pinned prompt answered: A/B attribution without log scraping
     handled_for: str
     request_id: str
 
@@ -48,6 +50,13 @@ class HealthResponse(BaseModel):
     model: str
     llm_endpoint: str        # host only: proves the endpoint switch without leaking keys
     cache: str               # redis | memory | off
+    prompt_version: str      # variant A, as loaded and hashed at startup
+    prompt_sha256: str
+    candidate: dict | None   # variant B (version, sha256, traffic_pct) when a canary runs
+    config_sha256: str       # hash of config/triage.yaml as loaded
+    model_version: str
+    image_tag: str           # set at build time (Dockerfile ARG IMAGE_TAG)
+    git_sha: str
 
 
 def write_audit_line(trace_id: str, username: str, county: str, urgency: str) -> None:
@@ -63,7 +72,8 @@ def health():
     return {"service": SERVICE, "version": VERSION, "status": "ok", "model_backend": TRIAGE_BACKEND,
             "model": OPENAI_MODEL,
             "llm_endpoint": urlparse(LLM_BASE_URL).netloc if LLM_BASE_URL else "api.openai.com",
-            "cache": response_cache.backend() if CACHE_ENABLED else "off"}
+            "cache": response_cache.backend() if CACHE_ENABLED else "off",
+            **prompt_app.version_info()}
 
 
 @app.post("/triage", response_model=TriageResponse,
@@ -88,5 +98,6 @@ def triage(body: TriageRequest, request: Request, response: Response, background
     response.headers["X-Cache"] = cache_status
     background.add_task(write_audit_line, trace_id, user["sub"], body.county, result["urgency"])
     return TriageResponse(urgency=result["urgency"], advice=result["advice"],
-                          model_used=result["model_used"], handled_for=user["sub"],
+                          model_used=result["model_used"], prompt_version=result["prompt_version"],
+                          handled_for=user["sub"],
                           request_id=trace_id)

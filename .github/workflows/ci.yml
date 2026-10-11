@@ -1,58 +1,174 @@
-# CI: everything runs on the free stub model. No secrets, no API spend.
+# ci.yml - every change goes through the same gates, in order, and only a commit that
+# passed all of them can be deployed:
+#
+#   lint-test -> eval -> mcp-health -> build -> deploy-staging (main) -> deploy-production (tags v*)
+#
+# Required checks on main (branch protection): lint-test, eval, mcp-health, build.
+# Everything runs on the free stub model or recorded answers: no API key, no spend.
 name: ci
+
 on:
+  pull_request:
   push:
     branches: [main]
-  pull_request:
+    tags: ["v*"]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+env:
+  PYTHON_VERSION: "3.12"
+  IMAGE: ghcr.io/${{ github.repository_owner }}/afyaplus-triage
+  TRIAGE_BACKEND: stub
 
 jobs:
-  test:
+  lint-test:
     runs-on: ubuntu-latest
-    env:
-      TRIAGE_BACKEND: stub
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: pip
+        with: {python-version: "${{ env.PYTHON_VERSION }}", cache: pip}
       - run: pip install -r requirements-dev.txt
-      - name: Unit tests (API, cache, levers, cost arithmetic, deploy configs)
+      - name: Lint
+        run: ruff check .
+      - name: Unit tests
         run: python -m pytest -q
-      - name: Budgets agree with labels and the cost model
+      - name: Prompt pins (every prompt file matches prompts/pin.json; nothing edited in place)
+        run: python check_prompt_pin.py
+      - name: Release alignment (config, prompt bundle, MCP, image tags, CHANGELOG, tag)
+        run: python scripts/check_release.py
+      - name: Week 7 cost controls still agree with the cost model
         run: python deploy/validate_budgets.py
-      - name: Cache hit-rate gate (exits 1 under 0.55)
-        run: python levers/cache_hitrate.py --mode on --backend stub
-      - name: Cost model and exec one-pager still build from the committed results
-        run: |
-          python cost/cost_model.py
-          python exec/build_one_pager.py
 
-  stack:
+  eval:
+    needs: lint-test
     runs-on: ubuntu-latest
-    needs: test
     steps:
       - uses: actions/checkout@v4
-      - name: Throwaway env file (placeholder JWT secret, stub model)
-        run: cp api/.env.example api/.env
-      - name: Compose config resolves
-        run: docker compose -f deploy/docker-compose.cost.yml config > /dev/null
-      - name: Start triage-api + Redis on the stub
-        run: TRIAGE_BACKEND=stub docker compose -f deploy/docker-compose.cost.yml up -d --build --wait
-      - name: /health reports the Redis cache; the same message is MISS then HIT
-        run: |
-          curl -sf localhost:8000/health | tee health.json
-          grep -q '"cache":"redis"' health.json
-          TOKEN=$(curl -sf -X POST localhost:8000/token -H 'Content-Type: application/json' \
-            -d '{"username":"mercy","password":"logistics2026"}' | python3 -c "import json,sys; print(json.load(sys.stdin)['access_token'])")
-          BODY='{"patient_message":"Fever for two days, drinking fluids","county":"Kisumu"}'
-          for want in MISS HIT; do
-            got=$(curl -si -X POST localhost:8000/triage -H "Authorization: Bearer $TOKEN" \
-              -H 'Content-Type: application/json' -d "$BODY" | tr -d '\r' | awk -F': ' 'tolower($1)=="x-cache"{print $2}')
-            echo "want=$want got=$got"; test "$got" = "$want"
-          done
-      - name: Logs on failure
-        if: failure()
-        run: docker compose -f deploy/docker-compose.cost.yml logs
-      - run: docker compose -f deploy/docker-compose.cost.yml down
+      - uses: actions/setup-python@v5
+        with: {python-version: "${{ env.PYTHON_VERSION }}", cache: pip}
+      - run: pip install -r requirements-dev.txt
+      - name: Eval gate (golden set, threshold 0.85, safety hard-fail, every servable prompt)
+        run: python eval_prompts.py --threshold 0.85
+      - name: Eval report
         if: always()
+        run: |
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json, pathlib
+          p = pathlib.Path("evals/report.json")
+          if not p.exists():
+              print("no eval report"); raise SystemExit
+          r = json.loads(p.read_text())
+          print(f"### Eval gate: {'PASS' if r['passed'] else 'FAIL'} (threshold {r['threshold']})")
+          print("| prompt | sha256 | eval_score | safety failures |\n|---|---|---|---|")
+          for v in r["versions"]:
+              print(f"| {v['version']} | `{v.get('prompt_sha256', '')[:12]}` | {v.get('eval_score', v.get('error'))} | {v.get('safety_failures', '-')} |")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: eval-report, path: evals/report.json, if-no-files-found: ignore}
+
+  mcp-health:
+    needs: eval
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "${{ env.PYTHON_VERSION }}", cache: pip}
+      - run: pip install -r requirements-dev.txt
+      - name: MCP health gate (stdio handshake, required tools, version://current, a real call)
+        run: python scripts/check_mcp_health.py
+      # Route A on purpose: the server speaks stdio, so there is no port to curl.
+
+  build:
+    needs: mcp-health
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      version: ${{ steps.meta.outputs.version }}
+      sha: ${{ steps.meta.outputs.sha }}
+      digest: ${{ steps.push.outputs.digest }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: meta
+        name: Release version and commit
+        run: |
+          echo "version=$(grep -E '^release:' config/triage.yaml | cut -d'"' -f2)" >> "$GITHUB_OUTPUT"
+          echo "sha=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Build both images (tags = release and release-commit; never latest)
+        run: |
+          V=${{ steps.meta.outputs.version }}; S=${{ steps.meta.outputs.sha }}
+          docker build --build-arg IMAGE_TAG=$V --build-arg GIT_SHA=$S \
+            -t afyaplus-triage:$V -t $IMAGE:$V-$S .
+          docker build -f Dockerfile.agent -t afyaplus-agent:$V .
+      - name: The image refuses to start without an injected secret (fail closed)
+        run: |
+          if docker run --rm afyaplus-triage:${{ steps.meta.outputs.version }}; then
+            echo "started without JWT_SECRET"; exit 1; fi
+      - name: Push to GHCR (main and release tags only; PRs never publish)
+        id: push
+        if: github.event_name == 'push'
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          V=${{ steps.meta.outputs.version }}; S=${{ steps.meta.outputs.sha }}
+          docker push $IMAGE:$V-$S
+          if [ "${{ github.ref_type }}" = "tag" ]; then
+            docker tag $IMAGE:$V-$S $IMAGE:$V && docker push $IMAGE:$V
+          fi
+          DIGEST=$(docker inspect --format '{{index .RepoDigests 0}}' $IMAGE:$V-$S | cut -d@ -f2)
+          echo "digest=$DIGEST" >> "$GITHUB_OUTPUT"
+          echo "### Image $IMAGE:$V-$S" >> "$GITHUB_STEP_SUMMARY"
+          echo "digest \`$DIGEST\`" >> "$GITHUB_STEP_SUMMARY"
+
+  deploy-staging:
+    needs: build
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment: staging
+    permissions: {contents: read, packages: read}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pull the image CI just built, by digest (promote, never rebuild)
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          docker pull $IMAGE@${{ needs.build.outputs.digest }}
+          docker tag $IMAGE@${{ needs.build.outputs.digest }} afyaplus-triage:${{ needs.build.outputs.version }}
+      - name: Deploy stub (compose on the runner, stub model) and smoke-test it
+        run: pip install -q pyyaml && bash scripts/smoke_deploy.sh
+        env:
+          WANT_VERSION: ${{ needs.build.outputs.version }}
+          WANT_SHA: ${{ needs.build.outputs.sha }}
+      - name: Record what was deployed
+        run: echo "staging <- afyaplus-triage ${{ needs.build.outputs.version }} @ ${{ needs.build.outputs.digest }}" >> "$GITHUB_STEP_SUMMARY"
+
+  deploy-production:
+    needs: [build, deploy-staging]
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-latest
+    environment: production
+    permissions: {contents: read, packages: read}
+    steps:
+      - uses: actions/checkout@v4
+      - name: The tag is the release (v<release>)
+        run: |
+          pip install -q pyyaml
+          python scripts/check_release.py --tag ${{ github.ref_name }}
+      - name: Pull the SAME digest staging ran
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          docker pull $IMAGE@${{ needs.build.outputs.digest }}
+          docker tag $IMAGE@${{ needs.build.outputs.digest }} afyaplus-triage:${{ needs.build.outputs.version }}
+      - name: Deploy stub (compose on the runner, stub model) and smoke-test it
+        run: pip install -q pyyaml && bash scripts/smoke_deploy.sh
+        env:
+          WANT_VERSION: ${{ needs.build.outputs.version }}
+          WANT_SHA: ${{ needs.build.outputs.sha }}
+      - name: Record what was promoted
+        run: echo "production <- afyaplus-triage ${{ needs.build.outputs.version }} @ ${{ needs.build.outputs.digest }} (stub deploy, no cloud)" >> "$GITHUB_STEP_SUMMARY"

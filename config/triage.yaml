@@ -1,0 +1,19 @@
+# config/triage.yaml - everything that changes triage behaviour without a code change.
+# Versioned in git, reviewed like code (CODEOWNERS), hashed onto /health as config_sha256.
+#
+# release is the ONE platform version (lockstep): git tag v<release>, image tag <release>,
+# prompt bundle (prompts/pin.json bundle_version) and the MCP server's version://current.
+# scripts/check_release.py fails CI if any of them disagree.
+release: "1.3.0"
+
+model: gpt-4o-mini-2024-07-18       # a dated snapshot, never a moving alias
+model_version: base-2024-07-18      # what weights are serving; the retrain stub bumps this
+temperature: 0
+max_tokens: 150
+timeout_s: 20
+
+prompt_version: "1.2.0"             # variant A, served to everyone not in the candidate slice
+
+candidate:                          # variant B: a canary prompt on a slice of partner keys
+  prompt_version: null              # e.g. "1.3.0-candidate"; null = no canary running
+  traffic_pct: 0                    # 0-100, by sha256 bucket of the county key (ab_prompt_flag.py)

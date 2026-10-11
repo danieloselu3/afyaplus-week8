@@ -6,13 +6,11 @@ import hashlib
 import json
 import time
 
+import prompt_app
 from config import CACHE_ENABLED, CACHE_TTL_S, OPENAI_MODEL, REDIS_URL, TRIAGE_BACKEND, get_logger
-from triage_model import SYSTEM_PROMPT
 
 log = get_logger("response_cache", "triage_api.log")
 
-# Changing the system prompt changes this tag, so stale answers from an old prompt are never served.
-PROMPT_TAG = hashlib.sha256(SYSTEM_PROMPT.encode()).hexdigest()[:12]
 
 metrics = {"hits": 0, "misses": 0}
 _mem: dict[str, tuple[float, dict]] = {}
@@ -43,9 +41,12 @@ def normalise(message: str) -> str:
     return " ".join(message.lower().split())
 
 
-def make_key(message: str, county: str) -> str:
+def make_key(message: str, county: str, prompt_sha: str | None = None) -> str:
+    """The prompt's sha256 is in the key: a new prompt (or the canary variant) never
+    receives an answer that a different prompt produced."""
     model = OPENAI_MODEL if TRIAGE_BACKEND != "stub" else "stub"
-    raw = f"{model}|{PROMPT_TAG}|{normalise(county)}|{normalise(message)}"
+    tag = (prompt_sha or prompt_app.PROMPT_SHA256)[:12]
+    raw = f"{model}|{tag}|{normalise(county)}|{normalise(message)}"
     return "triage:" + hashlib.sha256(raw.encode()).hexdigest()
 
 
@@ -74,12 +75,13 @@ def _set(key: str, value: dict) -> None:
         log.warning("cache: set failed (%s), answer not cached", type(exc).__name__)
 
 
-def cached_triage(model_fn, message: str, county: str) -> tuple[dict, str]:
+def cached_triage(model_fn, message: str, county: str,
+                  prompt_sha: str | None = None) -> tuple[dict, str]:
     """Return (result, 'HIT' | 'MISS' | 'BYPASS'). Exceptions from model_fn propagate,
     so a failed model call is never cached."""
     if not CACHE_ENABLED:
         return model_fn(message, county), "BYPASS"
-    key = make_key(message, county)
+    key = make_key(message, county, prompt_sha)
     hit = _get(key)
     if hit is not None:
         metrics["hits"] += 1

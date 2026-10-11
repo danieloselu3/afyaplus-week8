@@ -20,7 +20,9 @@ RUN pip install -r requirements.txt
 RUN useradd --create-home --uid 10001 afya && mkdir -p /app/logs && chown afya /app/logs
 
 # 3. Code last: editing Python only rebuilds from here down
-COPY config.py auth.py rate_limit.py observability.py triage_model.py response_cache.py triage_api.py ./
+COPY config/ config/
+COPY prompts/ prompts/
+COPY config.py auth.py rate_limit.py observability.py prompt_app.py triage_model.py response_cache.py triage_api.py ./
 
 USER afya
 
@@ -29,10 +31,19 @@ USER afya
 ENV APP_ENV=production \
     LOG_DIR=/app/logs
 
+# Build identity, reported on /health. CI passes the release and the commit:
+#   docker build --build-arg IMAGE_TAG=1.2.0 --build-arg GIT_SHA=$(git rev-parse --short HEAD) .
+ARG IMAGE_TAG=dev
+ARG GIT_SHA=dev
+ENV IMAGE_TAG=$IMAGE_TAG \
+    GIT_SHA=$GIT_SHA
+
 # FinOps labels travel with the image; deploy/docker-compose.cost.yml repeats them per container.
 LABEL afyaplus.service="triage-api" \
-      afyaplus.version="1.2.0" \
-      afyaplus.cost-center="clinical-ai"
+      afyaplus.version="$IMAGE_TAG" \
+      afyaplus.cost-center="clinical-ai" \
+      org.opencontainers.image.revision="$GIT_SHA" \
+      org.opencontainers.image.source="https://github.com/danieloselu3/afyaplus-week8"
 
 EXPOSE 8000
 

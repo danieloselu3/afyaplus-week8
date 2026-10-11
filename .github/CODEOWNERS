@@ -1,0 +1,18 @@
+# Who must review what. In the AfyaPlus team, clinical_ops and ml-eng are separate people.
+# This is a solo teaching repo, so both roles map to the owner (declared in the README);
+# the structure is what a reviewer is checking.
+*                       @danieloselu3
+# Clinical-adjacent behaviour: clinical_ops + ml-eng
+/prompts/               @danieloselu3
+/config/                @danieloselu3
+/evals/                 @danieloselu3
+/fixtures/responses/    @danieloselu3
+/fixtures/quarantine.json @danieloselu3
+# Tool contracts agents depend on: ml-eng + logistics
+/logistics_mcp.py       @danieloselu3
+/logistics_mcp_versioned.py @danieloselu3
+# The gates themselves: changing a gate is changing the rules
+/.github/               @danieloselu3
+/eval_prompts.py        @danieloselu3
+/check_prompt_pin.py    @danieloselu3
+/scripts/check_*.py     @danieloselu3
