@@ -64,7 +64,9 @@ def main() -> int:
     release = str(yaml.safe_load((ROOT / "config" / "triage.yaml").read_text())["release"])
     try:
         problems = asyncio.run(asyncio.wait_for(probe(Path(args.server), release), TIMEOUT_S))
-    except Exception as exc:          # crash on import, bad handshake, timeout: all unhealthy
+    except TimeoutError:
+        problems = [f"no MCP handshake within {TIMEOUT_S} s: is the server still speaking stdio?"]
+    except Exception as exc:          # crash on import, bad handshake: all unhealthy
         cause = exc
         while getattr(cause, "exceptions", None):          # anyio nests errors in groups
             cause = cause.exceptions[0]

@@ -11,7 +11,7 @@ COMPOSE="docker compose -f deploy/docker-compose.cost.yml"
 trap '$COMPOSE logs --no-color triage-api | tail -20; $COMPOSE down' EXIT
 $COMPOSE up -d --no-build --wait
 curl -sf localhost:8000/health | tee health.json; echo
-python check_prompt_pin.py --url http://127.0.0.1:8000/health
+python check_prompt_pin.py --url http://127.0.0.1:8000/health --expect-config
 python - <<'PY'
 import json, os
 h = json.load(open("health.json"))

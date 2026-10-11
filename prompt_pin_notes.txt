@@ -1,0 +1,20 @@
+## 1. A stale image (afyaplus-triage:1.3.0, built before the canary) vs the v1.4.0 tree
+$ curl -s localhost:8000/health   (prompt fields)
+{'image_tag': '1.3.0', 'prompt_version': '1.2.0', 'candidate': None}
+$ python check_prompt_pin.py --url http://127.0.0.1:8000/health --expect-config
+variant A: prompt 1.2.0 sha256 85e5cb1d7efb... matches pin
+PROMPT PIN CHECK FAILED
+  - running canary is (None, 0), config says ('1.3.0-candidate', 10)
+exit=1
+
+## 2. The image built from this tree (afyaplus-triage:1.4.0)
+$ python check_prompt_pin.py --url http://127.0.0.1:8000/health --expect-config
+variant A: prompt 1.2.0 sha256 85e5cb1d7efb... matches pin
+variant B: prompt 1.3.0-candidate sha256 428a268f8e4f... matches pin
+running prompts match config/triage.yaml (variant A and canary)
+exit=0
+
+## 3. Fail closed at boot: PROMPT_VERSION names a prompt that is not pinned
+$ docker run --rm -e PROMPT_VERSION=1.9.9 ... afyaplus-triage:1.4.0
+FileNotFoundError: No prompt for version '1.9.9': /app/prompts/triage_system_v1.9.9.txt
+exit=1

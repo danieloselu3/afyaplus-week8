@@ -1,0 +1,35 @@
+$ python mcp_dashboard_sketch.py --log logs/demo/mcp_server.log   (72 real calls through the logged tools)
+72 tool calls in logs\demo\mcp_server.log
+{
+  "check_stock": {
+    "n": 40,
+    "error_rate": 0.15,
+    "avg_ms": 0.0
+  },
+  "plan_delivery_route": {
+    "n": 10,
+    "error_rate": 0.0,
+    "avg_ms": 0.0
+  },
+  "get_delivery_eta": {
+    "n": 12,
+    "error_rate": 0.083,
+    "avg_ms": 0.0
+  },
+  "list_low_stock": {
+    "n": 10,
+    "error_rate": 0.0,
+    "avg_ms": 0.0
+  }
+}
+ALERT check_stock {'n': 40, 'error_rate': 0.15, 'avg_ms': 0.0}
+exit=1
+
+$ grep "tool=check_stock" logs/demo/mcp_server.log | grep outcome=error | head -1
+INFO logistics_mcp trace=demo tool=check_stock item='paracetamol' outcome=error ms=0
+
+$ python mcp_alert.py
+ALERT check_stock {'n': 50, 'error_rate': 0.12, 'avg_ms': 0.0}
+report={'check_stock': {'n': 50, 'error_rate': 0.12, 'avg_ms': 0.0}, 'ping': {'n': 20, 'error_rate': 0.0, 'avg_ms': 0.0}}
+stock_alert=True
+ping_alert=False

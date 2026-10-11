@@ -69,3 +69,13 @@ def test_health_check_against_a_running_service_detects_a_swap(monkeypatch):
     assert check_prompt_pin.url_problems(pin, "http://x/health") == []
     monkeypatch.setattr(check_prompt_pin.urllib.request, "urlopen", lambda url, timeout: Resp(bad))
     assert check_prompt_pin.url_problems(pin, "http://x/health")
+
+
+def test_expect_config_catches_a_stale_deploy_without_the_canary():
+    config = {"prompt_version": "1.2.0", "candidate": {"prompt_version": "1.3.0-candidate", "traffic_pct": 10}}
+    stale = {"prompt_version": "1.2.0", "candidate": None}
+    current = {"prompt_version": "1.2.0", "candidate": {"prompt_version": "1.3.0-candidate", "traffic_pct": 10}}
+    assert check_prompt_pin.config_problems(stale, config)
+    assert check_prompt_pin.config_problems(current, config) == []
+    rolled_back = {**current, "prompt_version": "1.1.0"}
+    assert check_prompt_pin.config_problems(rolled_back, config)

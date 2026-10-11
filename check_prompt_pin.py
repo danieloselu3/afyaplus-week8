@@ -50,7 +50,21 @@ def offline_problems(pin: dict, config: dict) -> list[str]:
     return problems
 
 
-def url_problems(pin: dict, url: str) -> list[str]:
+def config_problems(health: dict, config: dict) -> list[str]:
+    """Is the running service serving what git's config says it should?"""
+    problems = []
+    if health.get("prompt_version") != config["prompt_version"]:
+        problems.append(f"running variant A is {health.get('prompt_version')}, config says {config['prompt_version']}")
+    cand = config.get("candidate") or {}
+    want = (cand.get("prompt_version"), cand.get("traffic_pct", 0)) if cand.get("traffic_pct", 0) > 0 else (None, 0)
+    got = health.get("candidate") or {}
+    have = (got.get("prompt_version"), got.get("traffic_pct", 0)) if got else (None, 0)
+    if have != want:
+        problems.append(f"running canary is {have}, config says {want}")
+    return problems
+
+
+def url_problems(pin: dict, url: str, config: dict | None = None) -> list[str]:
     try:
         with urllib.request.urlopen(url, timeout=5) as resp:
             health = json.loads(resp.read().decode())
@@ -68,16 +82,23 @@ def url_problems(pin: dict, url: str) -> list[str]:
                             f"{(expected or 'nothing')[:12]}")
         else:
             print(f"variant {variant}: prompt {version} sha256 {sha[:12]}... matches pin")
+    if config is not None:
+        problems += config_problems(health, config)
+        if not problems:
+            print("running prompts match config/triage.yaml (variant A and canary)")
     return problems
 
 
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--url", help="a running /health to compare against the pin")
+    ap.add_argument("--expect-config", action="store_true",
+                    help="with --url: also require the running prompts to be the ones config serves")
     args = ap.parse_args()
     pin = json.loads((PROMPTS / "pin.json").read_text(encoding="utf-8"))
     config = yaml.safe_load((ROOT / "config" / "triage.yaml").read_text(encoding="utf-8"))
-    problems = url_problems(pin, args.url) if args.url else offline_problems(pin, config)
+    problems = (url_problems(pin, args.url, config if args.expect_config else None) if args.url
+                else offline_problems(pin, config))
     if problems:
         print("PROMPT PIN CHECK FAILED")
         for p in problems:

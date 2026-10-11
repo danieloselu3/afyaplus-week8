@@ -38,7 +38,7 @@ def test_different_county_or_message_is_a_different_key():
 def test_failed_model_call_is_never_cached(monkeypatch):
     headers = login()
 
-    def down(message, county):
+    def down(message, county, variant="A"):
         raise ModelUnavailable("APITimeoutError")
 
     monkeypatch.setattr(triage_api, "triage_model", down)
