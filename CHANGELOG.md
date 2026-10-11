@@ -22,6 +22,12 @@ All notable changes are recorded here. Format: [Keep a Changelog](https://keepac
   - Plan: in a 1.x minor, accept both names and log a deprecation warning for `item`. Remove `item` in 2.0.0, and no earlier than 30 days after partners are told.
   - CI blocks the rename until then: `scripts/check_mcp_health.py` requires `check_stock` with its current shape.
 
+## [1.4.0] - unreleased
+### Added
+- **Canary prompt `1.3.0-candidate`** on 10% of county keys (`config/triage.yaml` `candidate`). Variant A stays on the pinned prompt `1.2.0`. The assignment is sticky by sha256 bucket of the county (`ab_prompt_flag.py`).
+- Per-request A/B metrics (`ab_metrics.py`, `logs/ab_requests.jsonl`, message hashed) and `ab_report.py`.
+- The `X-Prompt-Variant` response header; `/triage` echoes the prompt version that answered.
+
 ## [1.3.1] - 2026-10-11
 ### Fixed
 - **Pipeline:** the `deploy-production` job installed only PyYAML. `scripts/check_release.py` imports the MCP server, which needs the `mcp` package, so the production promotion of `v1.3.0` failed at its first step. Build, the four gates and staging had all passed. The job now installs `requirements-dev.txt`.
