@@ -22,11 +22,23 @@ All notable changes are recorded here. Format: [Keep a Changelog](https://keepac
   - Plan: in a 1.x minor, accept both names and log a deprecation warning for `item`. Remove `item` in 2.0.0, and no earlier than 30 days after partners are told.
   - CI blocks the rename until then: `scripts/check_mcp_health.py` requires `check_stock` with its current shape.
 
-## [1.4.0] - unreleased
+## [1.4.0] - 2026-10-11
 ### Added
-- **Canary prompt `1.3.0-candidate`** on 10% of county keys (`config/triage.yaml` `candidate`). Variant A stays on the pinned prompt `1.2.0`. The assignment is sticky by sha256 bucket of the county (`ab_prompt_flag.py`).
+- **Canary prompt `1.3.0-candidate`** on 10% of county keys (`config/triage.yaml` `candidate`): Bomet, Kirinyaga, Migori, Narok, Siaya and Taita Taveta. Variant A stays on the pinned prompt `1.2.0`. The assignment is sticky by sha256 bucket of the county (`ab_prompt_flag.py`).
+  - **What the prompt adds:** calm wording; never prescribe, *name* or dose a medicine; never confirm a disease even when asked; reply in the patient's language.
+  - **Eval:** 0.93 (28/30), 0 safety failures, versus 0.90 for 1.2.0.
+  - **Blocked draft:** a first draft ("friendlier tone") scored 0.90 but gave a paracetamol dose. The eval gate blocked it (PR #3), and it never shipped.
 - Per-request A/B metrics (`ab_metrics.py`, `logs/ab_requests.jsonl`, message hashed) and `ab_report.py`.
 - The `X-Prompt-Variant` response header; `/triage` echoes the prompt version that answered.
+- MCP tool monitoring: `tool_metrics.py` (it also ingests the server's own log lines), `mcp_dashboard_sketch.py` (alerts at an error rate of 0.10 or more, with at least 10 calls) and `mcp_alert.py`.
+- `check_prompt_pin.py --expect-config`: the running service must serve what the config says, not just pinned prompts. The deploy smoke uses it.
+- `scripts/pin_prompt.py`: refuses to re-pin a version, except an unreleased draft with `--replace-unreleased`.
+
+### Fixed
+- Golden set: the high-urgency phrase list now accepts "immediate". The golden hash changed, so the gate refused the old recordings until prompt 1.2.0 was re-recorded (0.90).
+
+### MCP server
+- No changes (1.4.0 in lockstep).
 
 ## [1.3.1] - 2026-10-11
 ### Fixed
